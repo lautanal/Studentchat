@@ -13,7 +13,7 @@ CREATE TABLE users (
     username TEXT UNIQUE,
     password TEXT,
     privileges INTEGER,
-    alias TEXT,
+    alias TEXT
 );
 CREATE TABLE messages (
     id SERIAL PRIMARY KEY,
