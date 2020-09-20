@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<h1>STUDENTCHAT</h1>
+Olet kirjautunut nimellä {{ user_name }} &nbsp <a href="/logout">Kirjaudu ulos</a>
+<hr>
+{% for area in areas %}
+<p>
+    <a href="/topics/{{ area[0] }}">{{ area[1] }}</a>
+<p>
+<hr>
+{% endfor %}

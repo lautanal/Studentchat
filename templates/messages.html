@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<h1>STUDENTCHAT</h1>
+Olet kirjautunut nimellä {{ user_name }} &nbsp <a href="/logout">Kirjaudu ulos</a>
+<hr>
+<h3><a href="/topics/{{ area_id }}">{{ area_name }}</a></h3>
+<h2>{{ topic_name }}</h2>
+Viestien määrä: {{ count }}
+<hr>
+{% for message in messages %}
+    {{ message[4].strftime("%Y-%m-%d %H:%M") }}
+    {% if message[2] == user_id %}
+        <h3 style="color:red;"><b><i>{{ message[3] }}:</i></b></h3>
+        {{ message[1] }}
+        <h3><a href="/modify/{{ area_id }}/{{ topic_id }}/{{ message[0] }}">Muuta</a></h3>
+        <h3><a href="/messagedel/{{ area_id }}/{{ topic_id }}/{{ message[0] }}">Poista</a></h3>
+    {% else %}
+        <h3 style="color:blue;"><b><i>{{ message[3] }}:</i></b></h3>
+        {{ message[1] }}
+    {% endif %}
+    <p></p>
+    <hr>
+{% endfor %}
+<h3><a href="/new/{{ area_id }}/{{ topic_id }}">Uusi viesti</a></h3>
+
+
