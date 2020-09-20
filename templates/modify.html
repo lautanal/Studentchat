@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<form action="/modsave/{{ area_id }}/{{ topic_id }}/{{ message_id }}" method="post">
+<h1>STUDENTCHAT</h1>
+<form action="/send/{{ area_id }}/{{ topic_id }}" method="post">
+    <form action="/modsave/{{ area_id }}/{{ topic_id }}/{{ message_id }}" method="post">
     Viesti: <br>
     <textarea name="content" rows="5" cols="50">{{ content }}</textarea>
     <br>

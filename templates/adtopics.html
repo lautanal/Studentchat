@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<h1>STUDENTCHAT ADMIN</h1>
+Olet kirjautunut nimellä {{ user_name }} &nbsp <a href="/adlogout">Kirjaudu ulos</a>
+<hr>
+<h3><a href="/admin/areas">Muut keskustelualueet</a></h3>
+<hr>
+<h2>{{ area_name }}</h2>
+<hr>
+{% for topic in topics %}
+<p>
+    <a href="/admin/messages/{{ area_id }}/{{ topic[0] }}">{{ topic[1] }}</a>
+<p>
+<hr>
+{% endfor %}

@@ -14,12 +14,11 @@ Viestien määrä: {{ count }}
         <p>
         <a href="/modify/{{ area_id }}/{{ topic_id }}/{{ message[0] }}">Muuta</a>
         <a href="/messagedel/{{ area_id }}/{{ topic_id }}/{{ message[0] }}">Poista</a>
-        </p>
     {% else %}
         <h3 style="color:blue;"><b><i>{{ message[3] }}:</i></b></h3>
         {{ message[1] }}
     {% endif %}
-    <p></p>
+    <p>
     <hr>
 {% endfor %}
 <h3><a href="/new/{{ area_id }}/{{ topic_id }}">Uusi viesti</a></h3>

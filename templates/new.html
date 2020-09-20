@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <form action="/send/{{ area_id }}/{{ topic_id }}" method="post">
+    <h1>STUDENTCHAT</h1>
     Viesti: <br>
-    <textarea name="content" rows="5" cols="50"></textarea>
+    <textarea name="content" rows="5" cols="50">{{ content }}</textarea>
     <br>
     <input type="submit" value="Lähetä">
 </form>
