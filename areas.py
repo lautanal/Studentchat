@@ -2,7 +2,10 @@ from db import db
 
 #Viestialueiden haku
 def get_areas(user_rights):
-    sql = "SELECT id, areaname FROM areas WHERE hidden <= :user_rights ORDER BY id"
+    if (user_rights > 0):
+        sql = "SELECT id, areaname FROM areas ORDER BY id"
+    else:
+        sql = "SELECT id, areaname FROM areas WHERE hidden = false ORDER BY id"
     result = db.session.execute(sql, {"user_rights":user_rights})
     return result.fetchall()
 
