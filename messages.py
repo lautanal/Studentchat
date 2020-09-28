@@ -1,20 +1,26 @@
 from db import db
-import users
+import users, admins
 
-#Viestin haku
-def read_message(id):
-    sql = "SELECT content FROM messages WHERE id=:id"
-    result = db.session.execute(sql, {"id":id})
+# Viestin sisällön haku
+def read_message(message_id):
+    sql = "SELECT content FROM messages WHERE id=:message_id"
+    result = db.session.execute(sql, {"message_id":message_id})
     return result.fetchone()[0]
 
-#Ketjun viestien haku
+# Viestin kirjoittajan haku
+def get_author(message_id):
+    sql = "SELECT user_id FROM messages WHERE id=:message_id"
+    result = db.session.execute(sql, {"message_id":message_id})
+    return result.fetchone()[0]
+
+# Ketjun viestien haku
 def get_messages(topic_id):
     sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at FROM messages M, users U WHERE M.topic_id=:topic_id AND M.user_id=U.id ORDER BY M.id"
     result = db.session.execute(sql, {"topic_id":topic_id})
     return result.fetchall()
 
-#Uuden viestin talletus tietokantaan
-def send(topic_id, content):
+# Uuden viestin talletus tietokantaan
+def insert(topic_id, content):
     user_id = users.user_id()
     if user_id == 0:
         return False
@@ -23,22 +29,33 @@ def send(topic_id, content):
     db.session.commit()
     return True
 
-#Viestin poistaminen
-def delete(id):
+# Viestin poistaminen
+def delete(message_id):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "DELETE FROM messages WHERE id=:id"
-    db.session.execute(sql, {"id":id})
+    sql = "DELETE FROM messages WHERE id=:message_id"
+    db.session.execute(sql, {"message_id":message_id})
     db.session.commit()
     return True
 
-#Muutetun viestin talletus tietokantaan
-def modify(message_id, content):
+# Muutetun viestin talletus tietokantaan
+def update(message_id, content):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "UPDATE messages SET CONTENT = :content WHERE id = :id"
-    db.session.execute(sql, {"content":content, "id":message_id})
+    sql = "UPDATE messages SET CONTENT = :content WHERE id = :message_id"
+    db.session.execute(sql, {"content":content, "message_id":message_id})
     db.session.commit()
     return True
+
+# Viestin poistaminen (admin)
+def admin_delete(message_id):
+    admin_id = admins.admin_id()
+    if admin_id == 0:
+        return False
+    sql = "DELETE FROM messages WHERE id=:message_id"
+    db.session.execute(sql, {"message_id":message_id})
+    db.session.commit()
+    return True
+
