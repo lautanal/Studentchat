@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<form action="/sendreply/{{ area_id }}/{{ topic_id }}/{{ reply_id }}" method="post">
+    <h1>STUDENTCHAT</h1>
+    {{ author }} kirjoitti:
+    <br>
+    <br>
+    {{ message }}
+    <br>
+    <br>
+    Viesti: <br>
+    <textarea name="content" rows="5" cols="50">{{ content }}</textarea>
+    <br>
+    <input type="submit" value="Lähetä">
+</form>

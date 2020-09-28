@@ -48,20 +48,20 @@ def get_useralias(user_id):
     result = db.session.execute(sql, {"user_id":user_id})
     return result.fetchone()[0]
 
-#Käyttäjäoikeudet
+# Käyttäjäoikeudet
 def get_userrights():
     user_id = session.get("user_id",0)
     sql = "SELECT privileges FROM users WHERE id=:user_id"
     result = db.session.execute(sql, {"user_id":user_id})
     return result.fetchone()[0]
 
-#Käyttäjälista
+# Käyttäjälista
 def get_userlist():
     sql = "SELECT id, username, alias, privileges FROM users"
     result = db.session.execute(sql)
     return result.fetchall()
 
-#Käyttäjän poistaminen
+# Käyttäjän poistaminen
 def deleteuser(id):
     admin_id = session.get("admin_id",0)
     if admin_id == 0:

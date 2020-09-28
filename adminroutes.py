@@ -51,13 +51,13 @@ def ad_login():
         else:
             return render_template("error.html",message="Väärä tunnus tai salasana")
 
-#Admin logout
+# Admin logout
 @app.route("/adlogout")
 def ad_logout():
     admins.logout()
     return redirect("/admin")
 
-#Uusi admin käyttäjä
+# Uusi admin käyttäjä
 @app.route("/adregister", methods=["get","post"])
 def ad_register():
     if request.method == "GET":

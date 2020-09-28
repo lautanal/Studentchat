@@ -15,26 +15,27 @@ def get_author(message_id):
 
 # Ketjun viestien haku
 def get_messages(topic_id):
-    sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at FROM messages M, users U WHERE M.topic_id=:topic_id AND M.user_id=U.id ORDER BY M.id"
+    sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at FROM messages M, users U WHERE visible = true AND M.topic_id=:topic_id AND M.user_id=U.id ORDER BY M.id"
     result = db.session.execute(sql, {"topic_id":topic_id})
     return result.fetchall()
 
 # Uuden viestin talletus tietokantaan
-def insert(topic_id, content):
+def insert(topic_id, content, reply_id):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "INSERT INTO messages (content, topic_id, user_id, sent_at) VALUES (:content, :topic_id, :user_id, NOW())"
-    db.session.execute(sql, {"content":content, "topic_id":topic_id, "user_id":user_id})
+    sql = "INSERT INTO messages (content, topic_id, user_id, sent_at, reply_id, visible) VALUES (:content, :topic_id, :user_id, NOW(), :reply_id, true)"
+    db.session.execute(sql, {"content":content, "topic_id":topic_id, "user_id":user_id, "reply_id":reply_id})
     db.session.commit()
     return True
 
-# Viestin poistaminen
+# Viestin poistaminen (näkyviltä)
 def delete(message_id):
     user_id = users.user_id()
     if user_id == 0:
         return False
-    sql = "DELETE FROM messages WHERE id=:message_id"
+    sql = "UPDATE messages SET visible = false WHERE id = :message_id"
+#    sql = "DELETE FROM messages WHERE id=:message_id"
     db.session.execute(sql, {"message_id":message_id})
     db.session.commit()
     return True

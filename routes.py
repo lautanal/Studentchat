@@ -46,7 +46,7 @@ def send(area_id, topic_id):
     content = request.form["content"]
     if isBlank(content) :
             return render_template("error.html",message="Tyhjä kenttä, viestiä ei talletettu")
-    if messages.insert(topic_id, content):
+    if messages.insert(topic_id, content, None):
         return redirect("/messages/"+str(area_id)+"/"+str(topic_id))
     else:
         return render_template("error.html",message="Viestin talletus ei onnistunut")
@@ -68,7 +68,7 @@ def update(area_id, topic_id, message_id):
     else:
         return render_template("error.html",message="Viestin talletus ei onnistunut")
 
-# Viestin poisto
+# Viestin poisto (näkyviltä)
 @app.route("/messagedel/<int:area_id>/<int:topic_id>/<int:message_id>")
 def deletem(area_id, topic_id, message_id):
     if messages.delete(message_id):
@@ -80,10 +80,20 @@ def deletem(area_id, topic_id, message_id):
 @app.route("/reply/<int:area_id>/<int:topic_id>/<int:message_id>")
 def reply(area_id, topic_id, message_id):
     user_id = messages.get_author(message_id)
-    user_alias = users.get_useralias(user_id)
-    content = messages.read_message(message_id)
-    content = user_alias + " kirjoitti: \n" + content + "\n\n"
-    return render_template("new.html", area_id=area_id, topic_id=topic_id, content=content)
+    author = users.get_useralias(user_id)
+    message = messages.read_message(message_id)
+    return render_template("reply.html", area_id=area_id, topic_id=topic_id, content="", reply_id=message_id, author=author, message=message)
+
+# Vastauksen talletus tietokantaan
+@app.route("/sendreply/<int:area_id>/<int:topic_id>/<int:reply_id>", methods=["post"])
+def send_reply(area_id, topic_id, reply_id):
+    content = request.form["content"]
+    if isBlank(content) :
+            return render_template("error.html",message="Tyhjä kenttä, viestiä ei talletettu")
+    if messages.insert(topic_id, content, reply_id):
+        return redirect("/messages/"+str(area_id)+"/"+str(topic_id))
+    else:
+        return render_template("error.html",message="Viestin talletus ei onnistunut")
 
 # Uusi viestiketju
 @app.route("/newtopic/<int:area_id>")
