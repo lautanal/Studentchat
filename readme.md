@@ -17,15 +17,17 @@ Ylläpitäjä voi:
 - poistaa viestejä
 - hallinnoida käyttäjien oikeuksia
 
-Versio 0.2:n kuvaus
+Versio 0.4:n kuvaus
 
 Sovellus löytyy osoitteesta: https://tsoha-schat.herokuapp.com/
 
-Versio on raakaversio V0.2. Tällä hetkellä käyttäjä voi tehdä seuraavia asioita:
+Versio on raakaversio V0.4. Tällä hetkellä käyttäjä voi tehdä seuraavia asioita:
 - luoda käyttäjätunnuksen
 - lukea ja kirjoittaa viestejä (eri alueille)
 - muokata ja poistaa omia viestejä
 - aloittaa viestiketjun
 
-Ylläpitäjän toimintojen rakentaminen on vielä kesken
-
+Ylläpitäjä voi tehdä:
+- Luoda uusia viestialueita ja viestiketjuja
+- Poistaa käyttäjien viestejä
+- Haliinnoida käyttäjien oikeuksia (peruskäyttäjä, pääsy salaisille alueille, käytön esto)

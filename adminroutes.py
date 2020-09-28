@@ -94,7 +94,7 @@ def ad_login():
 @app.route("/adlogout")
 def ad_logout():
     admins.logout()
-    return redirect("/admin")
+    return redirect("/")
 
 # Uusi admin käyttäjä
 @app.route("/adregister", methods=["get","post"])
