@@ -20,7 +20,6 @@ Ylläpitäjä voi:
 Versio 0.2:n kuvaus
 
 Sovellus löytyy osoitteesta: https://tsoha-schat.herokuapp.com/
-(valmiina käyttäjätunnus guest, salasana guest)
 
 Versio on raakaversio V0.2. Tällä hetkellä käyttäjä voi tehdä seuraavia asioita:
 - luoda käyttäjätunnuksen

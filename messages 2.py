@@ -7,7 +7,7 @@ def read_message(message_id):
     result = db.session.execute(sql, {"message_id":message_id})
     return result.fetchone()[0]
 
-# Viestin kirjoittajan haku
+# Viestin kirjoittajan id:n haku
 def get_author(message_id):
     sql = "SELECT user_id FROM messages WHERE id=:message_id"
     result = db.session.execute(sql, {"message_id":message_id})

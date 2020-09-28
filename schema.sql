@@ -1,7 +1,7 @@
 CREATE TABLE areas (
     id SERIAL PRIMARY KEY,
     areaname TEXT,
-    hidden INTEGER
+    hidden BOOLEAN
 );
 CREATE TABLE topics (
     id SERIAL PRIMARY KEY,
@@ -20,7 +20,8 @@ CREATE TABLE messages (
     content TEXT,
     topic_id INTEGER REFERENCES topics,
     user_id INTEGER REFERENCES users,
-    sent_at TIMESTAMP
+    sent_at TIMESTAMP,
+    reply_id INTEGER REFERENCES messages
 );
 CREATE TABLE admins (
     id SERIAL PRIMARY KEY,
