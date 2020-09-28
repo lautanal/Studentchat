@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <h1>STUDENTCHAT ADMIN</h1>
-Olet kirjautunut nimellä {{ user_name }} &nbsp <a href="/adlogout">Kirjaudu ulos</a>
+Olet kirjautunut nimellä {{ admin_name}} &nbsp <a href="/adlogout">Kirjaudu ulos</a>
 <hr>
 <h3><a href="/admin/areas">Muut keskustelualueet</a></h3>
 <hr>
 <h2>{{ area_name }}</h2>
+<h3><a href="/admin/newtopic/{{ area_id }}">Aloita uusi viestiketju</a></h3>
 <hr>
 {% for topic in topics %}
 <p>

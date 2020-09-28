@@ -10,30 +10,30 @@ def index():
 # Keskustelualueiden listaus
 @app.route("/areas")
 def list_areas():
-    user_id = users.user_id()
-    user_alias = users.get_useralias(user_id)
-    user_rights = users.get_userrights()
+    login_id = users.login_id()
+    login_alias = users.get_useralias(login_id)
+    user_rights = users.get_userrights(login_id)
     list = areas.get_areas(user_rights)
-    return render_template("areas.html", user_alias=user_alias, areas=list)
+    return render_template("areas.html", login_alias=login_alias, areas=list)
 
 # Viestiketjujen listaus
 @app.route("/topics/<int:area_id>")
 def list_topics(area_id):
-    user_id = users.user_id()
-    user_alias = users.get_useralias(user_id)
+    login_id = users.login_id()
+    login_alias = users.get_useralias(login_id)
     area_name = areas.get_areaname(area_id)
     list = topics.get_topics(area_id)
-    return render_template("topics.html", user_alias=user_alias, area_id=area_id, area_name=area_name, topics=list)
+    return render_template("topics.html", login_alias=login_alias, area_id=area_id, area_name=area_name, topics=list)
 
 # Viestien listaus
 @app.route("/messages/<int:area_id>/<int:topic_id>")
 def list_messages(area_id, topic_id):
-    user_id = users.user_id()
-    user_alias = users.get_useralias(user_id)
+    login_id = users.login_id()
+    login_alias = users.get_useralias(login_id)
     area_name = areas.get_areaname(area_id)
     topic_name = topics.get_topicname(topic_id)
     list = messages.get_messages(topic_id)
-    return render_template("messages.html", user_id=user_id, user_alias=user_alias, area_id=area_id, area_name=area_name, topic_id=topic_id, topic_name=topic_name, count=len(list), messages=list)
+    return render_template("messages.html", login_id=login_id, login_alias=login_alias, area_id=area_id, area_name=area_name, topic_id=topic_id, topic_name=topic_name, count=len(list), messages=list)
 
 # Uusi viesti
 @app.route("/new/<int:area_id>/<int:topic_id>")

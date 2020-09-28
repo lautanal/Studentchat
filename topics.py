@@ -12,10 +12,10 @@ def get_topicname(topic_id):
     return result.fetchone()[0]
 
 
-#U uden viestiketjun talletus tietokantaan
+# Uuden viestiketjun talletus tietokantaan
 def sendtopic(area_id, topic_name):
-#    user_id = users.user_id()
-#    if user_id == 0:
+#    login_id = users.login_id()
+#    if login_id == 0:
 #        return False
     sql = "INSERT INTO topics (topicname, area_id) VALUES (:topic_name, :area_id)"
     db.session.execute(sql, {"topic_name":topic_name, "area_id":area_id})

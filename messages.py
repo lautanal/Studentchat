@@ -21,18 +21,18 @@ def get_messages(topic_id):
 
 # Uuden viestin talletus tietokantaan
 def insert(topic_id, content, reply_id):
-    user_id = users.user_id()
-    if user_id == 0:
+    login_id = users.login_id()
+    if login_id == 0:
         return False
     sql = "INSERT INTO messages (content, topic_id, user_id, sent_at, reply_id, visible) VALUES (:content, :topic_id, :user_id, NOW(), :reply_id, true)"
-    db.session.execute(sql, {"content":content, "topic_id":topic_id, "user_id":user_id, "reply_id":reply_id})
+    db.session.execute(sql, {"content":content, "topic_id":topic_id, "user_id":login_id, "reply_id":reply_id})
     db.session.commit()
     return True
 
 # Viestin poistaminen (näkyviltä)
 def delete(message_id):
-    user_id = users.user_id()
-    if user_id == 0:
+    login_id = users.login_id()
+    if login_id == 0:
         return False
     sql = "UPDATE messages SET visible = false WHERE id = :message_id"
 #    sql = "DELETE FROM messages WHERE id=:message_id"
@@ -42,20 +42,20 @@ def delete(message_id):
 
 # Muutetun viestin talletus tietokantaan
 def update(message_id, content):
-    user_id = users.user_id()
-    if user_id == 0:
+    login_id = users.login_id()
+    if login_id == 0:
         return False
     sql = "UPDATE messages SET CONTENT = :content WHERE id = :message_id"
     db.session.execute(sql, {"content":content, "message_id":message_id})
     db.session.commit()
     return True
 
-# Viestin poistaminen (admin)
+# Viestin poistaminen (administraattori)
 def admin_delete(message_id):
     admin_id = admins.admin_id()
     if admin_id == 0:
         return False
-    sql = "DELETE FROM messages WHERE id=:message_id"
+    sql = "UPDATE messages SET visible = false WHERE id = :message_id"
     db.session.execute(sql, {"message_id":message_id})
     db.session.commit()
     return True

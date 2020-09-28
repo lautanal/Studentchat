@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <h1>STUDENTCHAT ADMIN</h1>
-Olet kirjautunut nimellä {{ user_name }} &nbsp <a href="/adlogout">Kirjaudu ulos</a>
+Olet kirjautunut nimellä {{ admin_name }} &nbsp <a href="/adlogout">Kirjaudu ulos</a>
 <hr>
 {% for user in userlist %}
-    Käyttäjätunnus: {{ user[1] }}
-    <p>
-    Nimi: {{ user[2] }}
-    <p>
-    Käyttöoikeudet:
-    <p>
-    <input type="radio" name="privileges" value="0"> Peruskäyttäjä
-    <input type="radio" name="privileges" value="1"> Salaiset alueet
-    <input type="radio" name="privileges" value="2"> Moderaattori
+    Käyttäjätunnus: {{ user[1] }} &nbsp;&nbsp; Nimi: {{ user[2] }}
+    &nbsp;&nbsp;
+    Käyttöoikeudet: &nbsp;&nbsp; 
+        {% if user[3]  == 0 %} käyttö estetty {% endif %}
+        {% if user[3]  == 1 %} peruskäyttäjä {% endif %}
+        {% if user[3]  == 2 %} pääsy salaisille alueille {% endif %}
+        {% if user[3]  == 3 %} moderaattori {% endif %}
     <p>   
-    <a href="/admin/userdel/{{ user[0] }}">Poista käyttäjä</a>
+    <a href="/admin/usermod/{{ user[0] }}">Muuta</a>
     <p>
     <hr>
 {% endfor %}

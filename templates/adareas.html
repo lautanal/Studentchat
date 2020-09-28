@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <h1>STUDENTCHAT ADMIN</h1>
-Olet kirjautunut nimellä {{ user_name }} &nbsp <a href="/adlogout">Kirjaudu ulos</a>
+Olet kirjautunut nimellä {{ admin_name }} &nbsp <a href="/adlogout">Kirjaudu ulos</a>
 <hr>
 {% for area in areas %}
 <p>
-    <a href="/admin/topics/{{ area[0] }}">{{ area[1] }}</a>
+    <a href="/admin/topics/{{ area[0] }}">{{ area[1] }}</a>{% if area[2] %} &nbsp;&nbsp; Salainen alue{% endif %}
 <p>
 <hr>
 {% endfor %}
+<br>
+<a href="/admin/newarea">Uusi keskustelualue</a>
+
