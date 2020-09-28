@@ -7,7 +7,7 @@ import users, areas, topics, messages, admins
 def index():
     return render_template("index.html")
 
-# Viestialueiden listaus
+# Keskustelualueiden listaus
 @app.route("/areas")
 def list_areas():
     user_id = users.user_id()

@@ -2,7 +2,7 @@ from db import db
 from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
 
-#Admin login
+# Admin login
 def login(username,password):
     sql = "SELECT password, id FROM admins WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
@@ -16,11 +16,11 @@ def login(username,password):
         else:
             return False
 
-#Admin logout
+# Admin logout
 def logout():
     del session["admin_id"]
 
-#Uusi admin käyttäjä
+# Uusi admin käyttäjä
 def register(username,password):
     hash_value = generate_password_hash(password)
     try:

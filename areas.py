@@ -1,6 +1,6 @@
 from db import db
 
-#Viestialueiden haku
+# Viestialueiden haku
 def get_areas(user_rights):
     if (user_rights > 0):
         sql = "SELECT id, areaname FROM areas ORDER BY id"
@@ -9,7 +9,7 @@ def get_areas(user_rights):
     result = db.session.execute(sql, {"user_rights":user_rights})
     return result.fetchall()
 
-#Viestialueiden haku (kaikki)
+# Viestialueiden haku (kaikki)
 def get_areas_all():
     sql = "SELECT id, areaname, hidden FROM areas ORDER BY id"
     result = db.session.execute(sql)

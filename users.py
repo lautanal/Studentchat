@@ -2,7 +2,7 @@ from db import db
 from flask import session
 from werkzeug.security import check_password_hash, generate_password_hash
 
-#Login
+# Login
 def login(username,password):
     sql = "SELECT password, id FROM users WHERE username=:username"
     result = db.session.execute(sql, {"username":username})
@@ -34,29 +34,34 @@ def register(username,password,alias):
 def user_id():
     return session.get("user_id",0)
 
+# Käyttäjänimi
 def get_username():
     user_id = session.get("user_id",0)
     sql = "SELECT username FROM users WHERE id=:user_id"
     result = db.session.execute(sql, {"user_id":user_id})
     return result.fetchone()[0]
 
+# Käyttäjän alias
 def get_useralias(user_id):
 #    user_id = session.get("user_id",0)
     sql = "SELECT alias FROM users WHERE id=:user_id"
     result = db.session.execute(sql, {"user_id":user_id})
     return result.fetchone()[0]
 
+#Käyttäjäoikeudet
 def get_userrights():
     user_id = session.get("user_id",0)
     sql = "SELECT privileges FROM users WHERE id=:user_id"
     result = db.session.execute(sql, {"user_id":user_id})
     return result.fetchone()[0]
 
+#Käyttäjälista
 def get_userlist():
     sql = "SELECT id, username, alias, privileges FROM users"
     result = db.session.execute(sql)
     return result.fetchall()
 
+#Käyttäjän poistaminen
 def deleteuser(id):
     admin_id = session.get("admin_id",0)
     if admin_id == 0:
