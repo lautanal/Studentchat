@@ -6,28 +6,25 @@ Peruskäyttäjä voi:
 
 - luoda käyttäjätunnuksen
 - lukea ja kirjoittaa viestejä (eri alueille)
+- vastat muiden viesteihin
+- muokata ja poistaa omia viestejä
 - hakea viestejä
 - aloittaa viestiketjun
-- muokata ja poistaa omia viestejä
 
 Ylläpitäjä voi:
 
-- luoda keskustelualueita
+- luoda uusia keskustelualueita ja viestiketjuja
 - hallinnoida keskustelualueita (mm. salaiset alueet)
 - poistaa viestejä
-- hallinnoida käyttäjien oikeuksia
+- haliinnoida käyttäjien oikeuksia (peruskäyttäjä, pääsy salaisille alueille, käytön esto)
 
-Versio 0.4:n kuvaus
+Nettisovelluksen kuvaus
 
-Sovellus löytyy osoitteesta: https://tsoha-schat.herokuapp.com/
+- sovellus löytyy osoitteesta: https://tsoha-schat.herokuapp.com/
+- versio on kehitysversio V0.5. 
+- sovelluksessa on toteutettu pääosin kaikki edellä kuvatut toiminnot
+- sovellusta ei ole vielä liiemmin testattu
+- sovelluksessa on pyritty estämään virheelliset syötteet, esim. tyhjät kentät
+- sovelluksen ulkonäköön ei ole vielä keskitytty
+- sovelluksessa on valmiina ylläpitäjän tunnus admin (salasana admin), jolla voi testata ylläpitoa osoitteessa https://tsoha-schat.herokuapp.com/admin
 
-Versio on raakaversio V0.4. Tällä hetkellä käyttäjä voi tehdä seuraavia asioita:
-- luoda käyttäjätunnuksen
-- lukea ja kirjoittaa viestejä (eri alueille)
-- muokata ja poistaa omia viestejä
-- aloittaa viestiketjun
-
-Ylläpitäjä voi tehdä:
-- Luoda uusia viestialueita ja viestiketjuja
-- Poistaa käyttäjien viestejä
-- Haliinnoida käyttäjien oikeuksia (peruskäyttäjä, pääsy salaisille alueille, käytön esto)

@@ -21,7 +21,8 @@ CREATE TABLE messages (
     topic_id INTEGER REFERENCES topics,
     user_id INTEGER REFERENCES users,
     sent_at TIMESTAMP,
-    reply_id INTEGER REFERENCES messages
+    visible BOOLEAN,
+    ref_message TEXT
 );
 CREATE TABLE admins (
     id SERIAL PRIMARY KEY,
