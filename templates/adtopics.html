@@ -9,7 +9,7 @@ Olet kirjautunut nimellä {{ admin_name}} &nbsp <a href="/adlogout">Kirjaudu ulo
 <hr>
 {% for topic in topics %}
 <p>
-    <a href="/admin/messages/{{ area_id }}/{{ topic[0] }}">{{ topic[1] }}</a>
+    <a href="/admin/messages/{{ topic[0] }}">{{ topic[1] }}</a>
 <p>
 <hr>
 {% endfor %}

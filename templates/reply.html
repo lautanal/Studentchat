@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<form action="/sendreply/{{ area_id }}/{{ topic_id }}/{{ reply_id }}" method="post">
+<form action="/sendreply/{{ message_id }}" method="post">
     <h1>STUDENTCHAT</h1>
     {{ author }} kirjoitti:
     <br>
-    <br>
-    {{ message }}
+    <label>
+        {{ message }}
+    </label>
     <br>
     <br>
     Viesti: <br>

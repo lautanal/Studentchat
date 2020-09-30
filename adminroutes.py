@@ -28,9 +28,10 @@ def ad_list_topics(area_id):
     return render_template("adtopics.html", admin_name=admin_name, area_id=area_id, area_name=area_name, topics=list)
 
 # Viestien hallinta
-@app.route("/admin/messages/<int:area_id>/<int:topic_id>")
-def ad_list_messages(area_id, topic_id):
+@app.route("/admin/messages/<int:topic_id>")
+def ad_list_messages(topic_id):
     admin_name = admins.get_adminname()
+    area_id = topics.get_area_id(topic_id)
     area_name = areas.get_areaname(area_id)
     topic_name = topics.get_topicname(topic_id)
     list = messages.get_messages(topic_id)
@@ -54,10 +55,11 @@ def areasend():
         return render_template("error.html",message="Viestiketjun talletus ei onnistunut")
 
 # Viestin poisto (näkyvistä)
-@app.route("/admin/messagedel/<int:area_id>/<int:topic_id>/<int:message_id>")
-def ad_deletem(area_id, topic_id, message_id):
+@app.route("/admin/messagedel/<int:message_id>")
+def ad_deletem(message_id):
+    topic_id = messages.get_topic_id(message_id)
     if messages.admin_delete(message_id):
-        return redirect("/admin/messages/"+str(area_id)+"/"+str(topic_id))
+        return redirect("/admin/messages/"+str(topic_id))
     else:
         return render_template("error.html",message="Viestin poisto ei onnistunut")
 

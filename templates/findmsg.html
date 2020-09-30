@@ -7,19 +7,9 @@
         Olet kirjautunut nimellä {{ login_alias }} &nbsp <a href="/logout">Kirjaudu ulos</a>
         <br>
         <hr>
-            <form action="/findmsg" method="post">
-                Hae viestejä<br>
-                Viestin kirjoittaja: <input type="text" name="user_search"> &nbsp
-                Etsittävä teksti: <input type="text" name="text_search"> &nbsp &nbsp
-                <input type="submit" value="Etsi">
-            </form>
+        <h3><a href="/areas">Keskustelualueet</a></h3>
         <hr>
-            <h3><a href="/areas">Muut keskustelualueet</a></h3>
-        <hr>
-            <h3><a href="/topics/{{ area_id }}">{{ area_name }}</a></h3>
-            <h2>{{ topic_name }}</h2>
-            Viestien määrä: {{ count }}
-            <h3><a href="/new/{{ topic_id }}">Uusi viesti</a></h3>
+        Löydettyjen viestien määrä: {{ count }}
         <hr>
         <div style="background-color: whitesmoke;">
             {% for message in messages %}
@@ -36,8 +26,18 @@
                         {{ message[1] }}
                     </div>
                     <p>
-                    <a href="/modify/{{ message[0] }}">Muuta</a>
-                    <a href="/messagedel/{{ message[0] }}">Poista</a>
+                    {% if (user_search == "") or (user_search == " ") %}
+                        <a href="/modify2/{{ message[0] }}/%20/{{ text_search }}">Muuta</a>
+                        <a href="/messagedel2/{{ message[0] }}/%20/{{ text_search }}">Poista</a>
+                    {% else %}
+                        {% if (text_search == "") or (text_search == " ") %}
+                            <a href="/modify2/{{ message[0] }}/{{ user_search }}/%20">Muuta</a>
+                            <a href="/messagedel2/{{ message[0] }}/{{ user_search }}/%20">Poista</a>
+                        {% else %}
+                            <a href="/modify2/{{ message[0] }}/{{ user_search }}/{{ text_search }}">Muuta</a>
+                            <a href="/messagedel2/{{ message[0] }}/{{ user_search }}/{{ text_search }}">Poista</a>
+                        {% endif %}
+                    {% endif %}
                 {% else %}
                     <h3 style="color:blue;"><b><i>{{ message[3] }}:</i></b></h3>
                     {% if message[5] != None %}
@@ -56,7 +56,6 @@
                 <hr>
             {% endfor %}
         </div>
-        <h3><a href="/new/{{ topic_id }}">Uusi viesti</a></h3>
     </body>
 </html>
 

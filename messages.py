@@ -8,24 +8,45 @@ def read_message(message_id):
     return result.fetchone()[0]
 
 # Viestin kirjoittajan id:n haku
-def get_author(message_id):
+def get_user_id(message_id):
     sql = "SELECT user_id FROM messages WHERE id=:message_id"
+    result = db.session.execute(sql, {"message_id":message_id})
+    return result.fetchone()[0]
+
+# Viestin ketjun id:n haku
+def get_topic_id(message_id):
+    sql = "SELECT topic_id FROM messages WHERE id=:message_id"
     result = db.session.execute(sql, {"message_id":message_id})
     return result.fetchone()[0]
 
 # Ketjun viestien haku
 def get_messages(topic_id):
-    sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at FROM messages M, users U WHERE visible = true AND M.topic_id=:topic_id AND M.user_id=U.id ORDER BY M.id"
+    sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message FROM messages M, users U WHERE M.visible = true AND M.topic_id=:topic_id AND M.user_id=U.id ORDER BY M.id"
     result = db.session.execute(sql, {"topic_id":topic_id})
     return result.fetchall()
 
+# Viestien haku tietojen perusteella
+def find_messages(user_alias, content):
+    user_alias = "%" + user_alias + "%"
+    content = "%" + content + "%"
+    if (user_alias == ""):
+        sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message FROM messages M, users U WHERE M.visible = true AND M.user_id=U.id AND M.content LIKE :content ORDER BY M.id"
+        result = db.session.execute(sql, {"content":content})
+    elif(content == ""):
+        sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message FROM messages M, users U WHERE M.visible = true AND M.user_id=U.id AND U.alias LIKE :user_alias ORDER BY M.id"
+        result = db.session.execute(sql, {"user_alias":user_alias})
+    else:
+        sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message FROM messages M, users U WHERE M.visible = true AND M.user_id=U.id AND U.alias LIKE :user_alias AND M.content LIKE :content  ORDER BY M.id"
+        result = db.session.execute(sql, {"user_alias":user_alias, "content":content})
+    return result.fetchall()
+
 # Uuden viestin talletus tietokantaan
-def insert(topic_id, content, reply_id):
+def insert(topic_id, content, ref_msg):
     login_id = users.login_id()
     if login_id == 0:
         return False
-    sql = "INSERT INTO messages (content, topic_id, user_id, sent_at, reply_id, visible) VALUES (:content, :topic_id, :user_id, NOW(), :reply_id, true)"
-    db.session.execute(sql, {"content":content, "topic_id":topic_id, "user_id":login_id, "reply_id":reply_id})
+    sql = "INSERT INTO messages (content, topic_id, user_id, sent_at, visible, ref_message) VALUES (:content, :topic_id, :user_id, NOW(), true, :ref_msg)"
+    db.session.execute(sql, {"content":content, "topic_id":topic_id, "user_id":login_id, "ref_msg":ref_msg})
     db.session.commit()
     return True
 

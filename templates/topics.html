@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <h1>STUDENTCHAT</h1>
-Olet kirjautunut nimellä {{ login_alias }} &nbsp <a href="/logout">Kirjaudu ulos</a>
+    Olet kirjautunut nimellä {{ login_alias }} &nbsp <a href="/logout">Kirjaudu ulos</a>
 <hr>
-<h3><a href="/areas">Muut keskustelualueet</a></h3>
+    <form action="/findmsg" method="post">
+        Hae viestejä<br>
+        Viestin kirjoittaja: <input type="text" name="user_search"> &nbsp
+        Etsittävä teksti: <input type="text" name="text_search"> &nbsp &nbsp
+        <input type="submit" value="Etsi">
+    </form>
 <hr>
-<h2>{{ area_name }}</h2>
-<h3><a href="/newtopic/{{ area_id }}">Aloita uusi viestiketju</a></h3>
+    <h3><a href="/areas">Muut keskustelualueet</a></h3>
+<hr>
+    <h2>{{ area_name }}</h2>
+    <h3><a href="/newtopic/{{ area_id }}">Aloita uusi viestiketju</a></h3>
 <hr>
 {% for topic in topics %}
-<p>
-    <a href="/messages/{{ area_id }}/{{ topic[0] }}">{{ topic[1] }}</a>
-<p>
-<hr>
+    <p>
+        <a href="/messages/{{ topic[0] }}">{{ topic[1] }}</a>
+    <p>
+    <hr>
 {% endfor %}

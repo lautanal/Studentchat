@@ -11,6 +11,10 @@ def get_topicname(topic_id):
     result = db.session.execute(sql, {"topic_id":topic_id})
     return result.fetchone()[0]
 
+def get_area_id(topic_id):
+    sql = "SELECT area_id FROM topics WHERE id=:topic_id"
+    result = db.session.execute(sql, {"topic_id":topic_id})
+    return result.fetchone()[0]
 
 # Uuden viestiketjun talletus tietokantaan
 def sendtopic(area_id, topic_name):

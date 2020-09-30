@@ -11,9 +11,15 @@ Viestien määrä: {{ count }}
 {% for message in messages %}
     {{ message[4].strftime("%Y-%m-%d %H:%M") }}
     <h3><i>{{ message[3] }}:</i></h3>
+    {% if message[5] != None %}
+        <div style="background-color: lightgray;">
+            {{ message[5] }}
+        </div>
+        <br>
+    {% endif %}
     {{ message[1] }}
     <p>
-    <a href="/admin/messagedel/{{ area_id }}/{{ topic_id }}/{{ message[0] }}">Poista</a>
+    <a href="/admin/messagedel/{{ message[0] }}">Poista</a>
     <p>
     <hr>
 {% endfor %}
