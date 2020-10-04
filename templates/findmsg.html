@@ -1,9 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h3><a href="/areas">Keskustelualueet</a></h3>
-    <hr>
-        Löydettyjen viestien määrä: {{ count }}
-        <br><br>
+    Löydettyjen viestien määrä: {{ count }}
+    <br><br>
     <hr>
     <div style="background-color: whitesmoke;">
         {% for message in messages %}
