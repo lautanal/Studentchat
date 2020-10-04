@@ -13,7 +13,7 @@
         <h2>{{ topic_name }}</h2>
         Viestien määrä: {{ count }}
         <br><br>
-        <h4><a href="/new/{{ topic_id }}">Uusi viesti</a></h4>
+        <h5><a href="/new/{{ topic_id }}">Uusi viesti</a></h5>
     <hr>
     <div style="background-color: whitesmoke;">
         {% for message in messages %}
@@ -50,5 +50,5 @@
             <hr>
         {% endfor %}
     </div>
-    <h4><a href="/new/{{ topic_id }}">Uusi viesti</a></h4>        
+    <h5><a href="/new/{{ topic_id }}">Uusi viesti</a></h5>        
 {% endblock content %}
