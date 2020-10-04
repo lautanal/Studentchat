@@ -1,7 +1,11 @@
-<!DOCTYPE html>
-<form action="/topicsend/{{ area_id }}" method="post">
-    <h1>STUDENTCHAT</h1>
-    Viestiketjun otsikko: <input type="text" name="topicname">
-    <p>
-    <input type="submit" value="Lähetä">
-</form>
+{% extends "layout.html" %}
+{% block content %}
+    <form action="/topicsend/{{ area_id }}" method="post">
+        Viestiketjun otsikko: <input type="text" name="topicname">
+        <p>
+        <input type="submit" value="Lähetä">
+    </form>
+    {% if error %}
+        <p class=error><strong>Virhe:</strong> {{ error }}
+    {% endif %}
+{% endblock content %}

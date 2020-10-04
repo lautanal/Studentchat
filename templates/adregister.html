@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<h1>STUDENTCHAT ADMIN</h1>
-<form action="/adregister" method="post">
-<h2>Luo uusi käyttäjätunnus</h2>
-Tunnus: <input type="text" name="username">
-<p>
-Salasana: <input type="password" name="password">
-<p>
-<input type="submit" value="Luo tunnus">
-</form>
+{% extends "adlayout.html" %}
+{% block content %}
+    <form action="/adregister" method="post">
+        <h2>Luo uusi käyttäjätunnus</h2>
+        Tunnus: <input type="text" name="username">
+        <p>
+        Salasana: <input type="password" name="password">
+        <p>
+        <input type="submit" value="Luo tunnus">
+    </form>
+{% endblock content %}

@@ -1,18 +1,19 @@
-<!DOCTYPE html>
-<h1>STUDENTCHAT ADMIN</h1>
-<hr>
-    Käyttäjätunnus: {{ user_name }}
-    <p>
-    Nimi: {{ user_alias }}
-    <p>
-    <form action="/admin/usersave/{{ user_id }}" method="POST">
-        Käyttöoikeudet:
+{% extends "adlayout.html" %}
+{% block content %}
+    <hr>
+        Käyttäjätunnus: {{ user_name }}
         <p>
-        <input type="radio" name="privileges" value="0" {% if user_rights  == 0 %} checked {% endif %} > Käyttö estetty
-        <input type="radio" name="privileges" value="1" {% if user_rights  == 1 %} checked {% endif %} > Peruskäyttäjä
-        <input type="radio" name="privileges" value="2" {% if user_rights  == 2 %} checked {% endif %} > Pääsy salaisille alueille
-        <input type="radio" name="privileges" value="3" {% if user_rights  == 3 %} checked {% endif %} > Moderaattori
+        Nimi: {{ user_alias }}
         <p>
-        <input type="submit" value="Talleta">
-    </form>
-<hr>
+        <form action="/admin/usersave/{{ user_id }}" method="POST">
+            Käyttöoikeudet:
+            <p>
+            <input type="radio" name="privileges" value="0" {% if user_rights  == 0 %} checked {% endif %} > Käyttö estetty
+            <input type="radio" name="privileges" value="1" {% if user_rights  == 1 %} checked {% endif %} > Peruskäyttäjä
+            <input type="radio" name="privileges" value="2" {% if user_rights  == 2 %} checked {% endif %} > Pääsy salaisille alueille
+            <input type="radio" name="privileges" value="3" {% if user_rights  == 3 %} checked {% endif %} > Moderaattori
+            <p>
+            <input type="submit" value="Talleta">
+        </form>
+    <hr>
+{% endblock content %}

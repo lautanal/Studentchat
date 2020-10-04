@@ -1,61 +1,55 @@
-<!DOCTYPE html>
-<html lang="fi">
-    <head>
-    </head>
-    <body>
-        <h1>STUDENTCHAT</h1>
-        Olet kirjautunut nimellä {{ login_alias }} &nbsp <a href="/logout">Kirjaudu ulos</a>
-        <br>
-        <hr>
-        <h3><a href="/areas">Keskustelualueet</a></h3>
-        <hr>
+{% extends "layout.html" %}
+{% block content %}
+    <h3><a href="/areas">Keskustelualueet</a></h3>
+    <hr>
         Löydettyjen viestien määrä: {{ count }}
-        <hr>
-        <div style="background-color: whitesmoke;">
-            {% for message in messages %}
-                {{ message[4].strftime("%Y-%m-%d %H:%M") }}
-                {% if message[2] == login_id %}
-                    <h3 style="color:red;"><i>{{ message[3] }}:</i></h3>
-                    {% if message[5] != None %}
-                        <div style="background-color: lightgray;">
-                            {{ message[5] }}
-                        </div>
-                        <br>
-                    {% endif %}
-                    <div>
-                        {{ message[1] }}
+        <br><br>
+    <hr>
+    <div style="background-color: whitesmoke;">
+        {% for message in messages %}
+            {{ message[4].strftime("%Y-%m-%d %H:%M") }}
+            {% if message[2] == login_id %}
+                <h3 style="color:red;"><i>{{ message[3] }}:</i></h3>
+                {% if message[5] != None %}
+                    <div style="background-color: lightgray;">
+                        {{ message[5] }}
                     </div>
-                    <p>
-                    {% if (user_search == "") or (user_search == " ") %}
-                        <a href="/modify2/{{ message[0] }}/%20/{{ text_search }}">Muuta</a>
-                        <a href="/messagedel2/{{ message[0] }}/%20/{{ text_search }}">Poista</a>
-                    {% else %}
-                        {% if (text_search == "") or (text_search == " ") %}
-                            <a href="/modify2/{{ message[0] }}/{{ user_search }}/%20">Muuta</a>
-                            <a href="/messagedel2/{{ message[0] }}/{{ user_search }}/%20">Poista</a>
-                        {% else %}
-                            <a href="/modify2/{{ message[0] }}/{{ user_search }}/{{ text_search }}">Muuta</a>
-                            <a href="/messagedel2/{{ message[0] }}/{{ user_search }}/{{ text_search }}">Poista</a>
-                        {% endif %}
-                    {% endif %}
-                {% else %}
-                    <h3 style="color:blue;"><b><i>{{ message[3] }}:</i></b></h3>
-                    {% if message[5] != None %}
-                        <div style="background-color: lightgray;">
-                            {{ message[5] }}
-                        </div>
-                        <br>
-                    {% endif %}
-                    <div>
-                        {{ message[1] }}
-                    </div>
-                    <p>
-                    <a href="/reply/{{ message[0] }}">Vastaa</a>
+                    <br>
                 {% endif %}
+                <div>
+                    {{ message[1] }}
+                </div>
                 <p>
-                <hr>
-            {% endfor %}
-        </div>
-    </body>
-</html>
+                {% if (user_search == "") or (user_search == " ") %}
+                    <a href="/modify2/{{ message[0] }}/%20/{{ text_search }}">Muuta</a>
+                    <a href="/messagedel2/{{ message[0] }}/%20/{{ text_search }}">Poista</a>
+                {% else %}
+                    {% if (text_search == "") or (text_search == " ") %}
+                        <a href="/modify2/{{ message[0] }}/{{ user_search }}/%20">Muuta</a>
+                        <a href="/messagedel2/{{ message[0] }}/{{ user_search }}/%20">Poista</a>
+                    {% else %}
+                        <a href="/modify2/{{ message[0] }}/{{ user_search }}/{{ text_search }}">Muuta</a>
+                        <a href="/messagedel2/{{ message[0] }}/{{ user_search }}/{{ text_search }}">Poista</a>
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                <h3 style="color:blue;"><b><i>{{ message[3] }}:</i></b></h3>
+                {% if message[5] != None %}
+                    <div style="background-color: lightgray;">
+                        {{ message[5] }}
+                    </div>
+                    <br>
+                {% endif %}
+                <div>
+                    {{ message[1] }}
+                </div>
+                <p>
+                <a href="/reply/{{ message[0] }}">Vastaa</a>
+            {% endif %}
+            <p>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock content %}
+
 

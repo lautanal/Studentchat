@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<h1>STUDENTCHAT</h1>
-<form action="/register" method="post">
-<h2>Luo uusi käyttäjätunnus</h2>
-Tunnus: <input type="text" name="username">
-<p>
-Salasana: <input type="password" name="password">
-<p>
-Nimi (näkyy muille): <input type="text" name="alias">
-<p>
-<input type="submit" value="Luo tunnus">
-</form>
+{% extends "layout.html" %}
+{% block content %}
+    <form action="/register" method="post">
+        <h2>Luo uusi käyttäjätunnus</h2>
+        Tunnus: <input type="text" name="username">
+        <p>
+        Salasana: <input type="password" name="password">
+        <p>
+        Nimi (näkyy muille): <input type="text" name="alias">
+        <p>
+        <input type="submit" value="Luo tunnus">
+    </form>
+{% endblock content %}

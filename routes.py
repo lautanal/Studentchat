@@ -51,7 +51,7 @@ def findmsg():
     user_search = request.form["user_search"].strip()
     text_search = request.form["text_search"].strip()
     if isBlank(user_search) and isBlank(text_search) :
-        return render_template("error.html",message="Tyhjät kentät, hakua ei tehty")
+        return render_template("find.html",error="Tyhjät kentät, hakua ei tehty")
     list = messages.find_messages(user_search, text_search)
 #    if user_search == "":
 #       user_search = "%20"
@@ -69,7 +69,7 @@ def new(topic_id):
 def send(topic_id):
     content = request.form["content"]
     if isBlank(content) :
-            return render_template("error.html",message="Tyhjä kenttä, viestiä ei talletettu")
+            return render_template("new.html", topic_id=topic_id, content="", error="Tyhjä kenttä, viestiä ei talletettu")
     if messages.insert(topic_id, content, None):
         return redirect("/messages/"+str(topic_id))
     else:
@@ -151,11 +151,12 @@ def send_reply(message_id):
     user_id = messages.get_user_id(message_id)
     topic_id = messages.get_topic_id(message_id)
     author = users.get_useralias(user_id)
-    ref_msg = messages.read_message(message_id)
-    ref_msg = author + " kirjoitti: \n" + ref_msg
+    message = messages.read_message(message_id)
+    ref_msg = author + " kirjoitti: \n" + message
     content = request.form["content"]
     if isBlank(content) :
-            return render_template("error.html",message="Tyhjä kenttä, viestiä ei talletettu")
+#            return render_template("error.html",message="Tyhjä kenttä, viestiä ei talletettu")
+        return render_template("reply.html", content="", message_id=message_id, author=author, message=message,error="Tyhjä kenttä, viestiä ei talletettu")
     if messages.insert(topic_id, content, ref_msg):
         return redirect("/messages/"+str(topic_id))
     else:
@@ -171,7 +172,7 @@ def newtopic(area_id):
 def topicsend(area_id):
     topic_name = request.form["topicname"]
     if isBlank(topic_name) :
-            return render_template("error.html",message="Tyhjä kenttä, viestiketjua ei aloitettu")
+            return render_template("newtopic.html", area_id=area_id, error="Tyhjä kenttä, viestiketjua ei aloitettu")
     if topics.sendtopic(area_id, topic_name):
         return redirect("/topics/"+str(area_id))
     else:

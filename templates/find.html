@@ -1,11 +1,13 @@
-<!DOCTYPE html>
-<form action="/findmsg" method="post">
-    <h1>STUDENTCHAT</h1>
-    <br>
-    Viestin kirjoittaja: <input type="text" name="user_search">
-    <br>
-    <br>
-    Etsittävä teksti: <input type="text" name="text_search">
-    <p>
-    <input type="submit" value="Etsi">
-</form>
+{% extends "layout.html" %}
+{% block content %}
+    <form action="/findmsg" method="post">
+        Hae viestejä<br>
+        Viestin kirjoittaja: <input type="text" name="user_search"> &nbsp
+        Etsittävä teksti: <input type="text" name="text_search"> &nbsp &nbsp
+        <input type="submit" value="Etsi">
+        <br><br>
+        {% if error %}
+            <span class=error><strong>Virhe:</strong> {{ error }}</span>
+        {% endif %}
+    </form>
+{% endblock content %}

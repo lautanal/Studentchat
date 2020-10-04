@@ -1,8 +1,13 @@
-<!DOCTYPE html>
-<form action="/send/{{ topic_id }}" method="post">
-    <h1>STUDENTCHAT</h1>
-    Viesti: <br>
-    <textarea name="content" rows="5" cols="50">{{ content }}</textarea>
+{% extends "layout.html" %}
+{% block content %}
+    <form action="/send/{{ topic_id }}" method="post">
+        Viesti: <br>
+        <textarea name="content" rows="5" cols="50">{{ content }}</textarea>
+        <br>
+        <input type="submit" value="Lähetä">
+    </form>
     <br>
-    <input type="submit" value="Lähetä">
-</form>
+    {% if error %}
+        <p class=error><strong>Virhe:</strong> {{ error }}
+    {% endif %}
+{% endblock content %}

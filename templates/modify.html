@@ -1,8 +1,9 @@
-<!DOCTYPE html>
-<h1>STUDENTCHAT</h1>
-<form action="/update/{{ message_id }}" method="post">
-    Viesti: <br>
-    <textarea name="content" rows="5" cols="50">{{ content }}</textarea>
-    <br>
-    <input type="submit" value="Talleta">
-</form>
+{% extends "layout.html" %}
+{% block content %}
+    <form action="/update/{{ message_id }}" method="post">
+        Viesti: <br>
+        <textarea name="content" rows="5" cols="50">{{ content }}</textarea>
+        <br>
+        <input type="submit" value="Talleta">
+    </form>
+{% endblock content %}

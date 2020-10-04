@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<form action="/admin/areasend" method="post">
-    <h1>STUDENTCHAT ADMIN</h1>
-    <br>
-    Uuden keskustelualueen otsikko: <input type="text" name="areaname">
-    <p>
-    <input type="radio" name="hidden" value="0" checked> Julkinen
-    <input type="radio" name="hidden" value="1"> Salainen
-    <p>   
-    <input type="submit" value="Lähetä">
-</form>
+{% extends "layout.html" %}
+{% block content %}
+    <form action="/admin/areasend" method="post">
+        <br>
+        Uuden keskustelualueen otsikko: <input type="text" name="areaname">
+        <p>
+        <input type="radio" name="hidden" value="0" checked> Julkinen
+        <input type="radio" name="hidden" value="1"> Salainen
+        <p>   
+        <input type="submit" value="Lähetä">
+    </form>
+    {% if error %}
+        <p class=error><strong>Virhe:</strong> {{ error }}
+    {% endif %}
+{% endblock content %}
