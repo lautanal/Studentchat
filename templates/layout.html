@@ -11,23 +11,39 @@
     {% else %}
         <title>Studentchat</title>
     {% endif %}
+    <style>
+      .header {
+          background: sandybrown;
+          font-weight: bold;
+          padding: 2em 1em;
+          font-size: 2em;
+      }
+      .header2 {
+          padding: 2em 1em;
+          font-size: 1em;
+      }
+   </style>
 </head>
 <body>
   <div class="container">
-    <nav class="navbar navbar-expand-sm navbar-light">
-      <span class="navbar-brand" href="#">Studentchat</span>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/register">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="logout">Logout</a>
-        </li>
-      </ul>
-    </nav>
+    <div class="header">
+      Studentchat
+    </div>
+    <div>
+      <nav class="navbar navbar-expand-sm navbar-light">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+          </ul>
+      </nav>
+    </div>
     <hr>
     {% block content %}{% endblock %}
   </div>
