@@ -3,7 +3,6 @@
     <h3><a href="/admin/areas">Muut keskustelualueet</a></h3>
     <hr>
     <h2>{{ area_name }}</h2>
-    <h4><a href="/admin/newtopic/{{ area_id }}">Aloita uusi viestiketju</a></h4>
     <hr>
     {% for topic in topics %}
         <p>
@@ -11,4 +10,6 @@
         <p>
         <hr>
     {% endfor %}
+    <br>
+    <h4><a href="/admin/newtopic/{{ area_id }}">Aloita uusi viestiketju</a></h4>
 {% endblock content %}

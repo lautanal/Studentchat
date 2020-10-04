@@ -4,27 +4,28 @@ Harjoituksen aiheeksi on valittu on opiskelijoille tarkoitettu, verkossa toimiva
 
 Peruskäyttäjä voi:
 
-- luoda käyttäjätunnuksen
-- lukea ja kirjoittaa viestejä (eri alueille)
-- vastat muiden viesteihin
-- muokata ja poistaa omia viestejä
-- hakea viestejä
-- aloittaa viestiketjun
+- Luoda käyttäjätunnuksen
+- Lukea ja kirjoittaa viestejä (eri alueille)
+- Vastata muiden viesteihin
+- Muokata ja poistaa omia viestejä
+- Hakea viestejä
+- Aloittaa viestiketjun
 
 Ylläpitäjä voi:
 
-- luoda uusia keskustelualueita ja viestiketjuja
-- hallinnoida keskustelualueita (mm. salaiset alueet)
-- poistaa viestejä
-- haliinnoida käyttäjien oikeuksia (peruskäyttäjä, pääsy salaisille alueille, käytön esto)
+- Luoda uusia keskustelualueita ja viestiketjuja
+- Hallinnoida keskustelualueita (mm. salaiset alueet)
+- Poistaa viestejä
+- Haliinnoida käyttäjien oikeuksia (peruskäyttäjä, pääsy salaisille alueille, käytön esto)
 
 Nettisovelluksen kuvaus
 
-- sovellus löytyy osoitteesta: https://tsoha-schat.herokuapp.com/
-- versio on kehitysversio V0.5. 
-- sovelluksessa on toteutettu pääosin kaikki edellä kuvatut toiminnot
-- sovellusta ei ole vielä liiemmin testattu
-- sovelluksessa on pyritty estämään virheelliset syötteet, esim. tyhjät kentät
-- sovelluksen ulkonäköön ei ole vielä keskitytty
-- sovelluksessa on valmiina ylläpitäjän tunnus admin (salasana admin), jolla voi testata ylläpitoa osoitteessa https://tsoha-schat.herokuapp.com/admin
+- Sovellus löytyy osoitteesta: https://tsoha-schat.herokuapp.com/
+- Versio on kehitysversio V0.6. 
+- Sovelluksessa on toteutettu pääosin kaikki edellä kuvatut toiminnot
+- Sovellusta ei ole vielä liiemmin testattu
+- Sovelluksessa on pyritty estämään virheelliset syötteet, esim. tyhjät kentät
+- Sovelluksen ulkonäköön ei ole vielä keskitytty kovin paljoa.  
+- Bootstrap-kokeilu piti peruttaa toistaiseksi, koska Herokussa sivut eivät näkyneet oikein
+- Sovelluksessa on valmiina ylläpitäjän tunnus admin (salasana admin), jolla voi testata ylläpitoa osoitteessa https://tsoha-schat.herokuapp.com/admin
 
