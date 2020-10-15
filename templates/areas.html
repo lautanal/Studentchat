@@ -1,15 +1,10 @@
-<!--
-<!DOCTYPE html>
-<h1>STUDENTCHAT</h1>
-Olet kirjautunut nimellä {{ login_alias }} &nbsp <a href="/logout">Kirjaudu ulos</a>
--->
 {% extends "layout.html" %}
 {% block content %}
     {% for area in areas %}
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
-              <h3><a class="Article-title" href="/topics/{{ area[0] }}">{{ area[1] }}</a></h3>
+              <h5><a class="Article-title" href="/topics/{{ area[0] }}">{{ area[1] }}</a></h5>
             </div>
           </div>
         </article>

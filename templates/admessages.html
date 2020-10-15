@@ -1,12 +1,12 @@
 {% extends "adlayout.html" %}
 {% block content %}
     <h3><a href="/admin/topics/{{ area_id }}">{{ area_name }}</a></h3>
-    <h2>{{ topic_name }}</h2>
+    <h3>{{ topic_name }}</h3>
     Viestien määrä: {{ count }}
     <hr>
     {% for message in messages %}
         {{ message[4].strftime("%Y-%m-%d %H:%M") }}
-        <h3><i>{{ message[3] }}:</i></h3>
+        <h5><i>{{ message[3] }}:</i></h5>
         {% if message[5] != None %}
             <div style="background-color: lightgray;">
                 {{ message[5] }}

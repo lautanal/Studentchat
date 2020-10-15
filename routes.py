@@ -5,7 +5,7 @@ import users, areas, topics, messages, admins
 # Aloitus
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", login="yes")
 
 # Keskustelualueiden listaus
 @app.route("/areas")
@@ -13,8 +13,8 @@ def list_areas():
     login_id = users.login_id()
     login_alias = users.get_useralias(login_id)
     user_rights = users.get_userrights(login_id)
-    list = areas.get_areas(user_rights)
-    return render_template("areas.html", login_alias=login_alias, areas=list)
+    alist = areas.get_areas(user_rights)
+    return render_template("areas.html", areas=alist)
 
 # Viestiketjujen listaus
 @app.route("/topics/<int:area_id>")
@@ -22,8 +22,8 @@ def list_topics(area_id):
     login_id = users.login_id()
     login_alias = users.get_useralias(login_id)
     area_name = areas.get_areaname(area_id)
-    list = topics.get_topics(area_id)
-    return render_template("topics.html", login_alias=login_alias, area_id=area_id, area_name=area_name, topics=list)
+    tlist = topics.get_topics(area_id)
+    return render_template("topics.html", area_id=area_id, area_name=area_name, topics=tlist)
 
 # Viestien listaus
 @app.route("/messages/<int:topic_id>")
@@ -36,14 +36,16 @@ def list_messages(topic_id):
     list = messages.get_messages(topic_id)
 #    print("VIESTILISTA:")
 #    print(len(list))
-    return render_template("messages.html", login_id=login_id, login_alias=login_alias, area_id=area_id, area_name=area_name, topic_id=topic_id, topic_name=topic_name, count=len(list), messages=list)
+    return render_template("messages.html", login_id=login_id, area_id=area_id, area_name=area_name, topic_id=topic_id, topic_name=topic_name, count=len(list), messages=list)
     
 # viestien haku
 @app.route("/find")
 def find():
+    login_id = users.login_id()
+    login_alias = users.get_useralias(login_id)
     return render_template("find.html")
 
-# Viestin haku inputin perusteella
+# Viestien haku tekstin perusteella
 @app.route("/findmsg", methods=["post"])
 def findmsg():
     login_id = users.login_id()
@@ -57,7 +59,7 @@ def findmsg():
 #       user_search = "%20"
 #    if text_search == "":
 #        text_search = "%20"
-    return render_template("findmsg.html", login_id=login_id, login_alias=login_alias, count=len(list), messages=list, user_search=user_search, text_search=text_search)
+    return render_template("findmsg.html", login_id=login_id, count=len(list), messages=list, user_search=user_search, text_search=text_search)
 
 # Uusi viesti
 @app.route("/new/<int:topic_id>")
@@ -182,37 +184,49 @@ def topicsend(area_id):
 @app.route("/login", methods=["get","post"])
 def login():
     if request.method == "GET":
-        return render_template("login.html")
+        return render_template("login.html", login="yes")
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
         if users.login(username,password):
             return redirect("/areas")
         else:
-#            flash("Väärä tunnus tai salasana")
-            return render_template("login.html")
+            error = "Väärä tunnus tai salasana"
+            return render_template("login.html", login="yes", error=error)
 
 # Logout
 @app.route("/logout")
 def logout():
     users.logout()
-    return redirect("/")
+    return render_template("logout.html", login="yes")
 
 # Uusi käyttäjä
 @app.route("/register", methods=["get","post"])
 def register():
     if request.method == "GET":
-        return render_template("register.html")
+        return render_template("register.html", login="yes")
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+        password2 = request.form["password2"]
         alias = request.form["alias"]
-        if isBlank(username) or isBlank(password) or isBlank(alias) :
-             return render_template("error.html",message="Tyhjä kenttä, rekisteröintiä ei tehty")
+        if isBlank(username):
+            error = "Käyttäjätunnus puuttuu"
+            return render_template("register.html", login="yes", username=username, alias=alias, error=error)
+        if isBlank(alias):
+            error = "Nimi puuttuu"
+            return render_template("register.html", login="yes", username=username, alias=alias, error=error)
+        if isBlank(password):
+            error = "Salasana puuttuu"
+            return render_template("register.html", login="yes", username=username, alias=alias, error=error)
+        if password != password2:
+            error = "Salasanat eivät samat"
+            return render_template("register.html", login="yes", username=username, alias=alias, error=error)
         if users.register(username,password,alias):
             return redirect("/areas")
         else:
-            return render_template("error.html",message="Rekisteröinti ei onnistunut")
+            error = "Rekisteröinti ei onnistunut"
+            return render_template("register.html", login="yes", error=error)
 
 def isBlank (myString):
     return not (myString and myString.strip())

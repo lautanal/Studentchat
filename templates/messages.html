@@ -1,16 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
     <h3><a href="/topics/{{ area_id }}">{{ area_name }}</a></h3>
-    <h2>{{ topic_name }}</h2>
+    <h3>{{ topic_name }}</h3>
     Viestien määrä: {{ count }}
     <br><br>
-    <h5><a href="/new/{{ topic_id }}">Uusi viesti</a></h5>
+    <h5><a href="/new/{{ topic_id }}">Kirjoita viesti</a></h5>
     <hr>
     <div style="background-color: whitesmoke;">
         {% for message in messages %}
             {{ message[4].strftime("%Y-%m-%d %H:%M") }}
             {% if message[2] == login_id %}
-                <h3 style="color:red;"><i>{{ message[3] }}:</i></h3>
+                <h5 style="color:red;"><i>{{ message[3] }}:</i></h5>
                 {% if message[5] != None %}
                     <div style="background-color: lightgray;">
                         {{ message[5] }}
@@ -24,7 +24,7 @@
                 <a href="/modify/{{ message[0] }}">Muuta</a>
                 <a href="/messagedel/{{ message[0] }}">Poista</a>
             {% else %}
-                <h3 style="color:blue;"><b><i>{{ message[3] }}:</i></b></h3>
+                <h5 style="color:blue;"><b><i>{{ message[3] }}:</i></b></h5>
                 {% if message[5] != None %}
                     <div style="background-color: lightgray;">
                         {{ message[5] }}
@@ -41,5 +41,4 @@
             <hr>
         {% endfor %}
     </div>
-    <h5><a href="/new/{{ topic_id }}">Uusi viesti</a></h5>        
 {% endblock content %}

@@ -5,7 +5,5 @@
         <p>
         <input type="submit" value="Lähetä">
     </form>
-    {% if error %}
-        <p class=error><strong>Virhe:</strong> {{ error }}
-    {% endif %}
+    <br><div style="color:red;" >{{ error }}</div><br>
 {% endblock content %}

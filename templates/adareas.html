@@ -1,11 +1,10 @@
 {% extends "adlayout.html" %}
 {% block content %}
-    {% for area in areas %}
-        <h3><a href="/admin/topics/{{ area[0] }}">{{ area[1] }}</a></h3>
-            {% if area[2] %} &nbsp;&nbsp; Salainen alue{% endif %}
-        <hr>
-    {% endfor %}
-    <br>
-    <h4><a href="/admin/newarea">Uusi keskustelualue</a></h4>
+{% for area in areas %}
+<h5><a href="/admin/topics/{{ area[0] }}">{{ area[1] }}</a></h5>
+{% if area[2] %} &nbsp;&nbsp; Salainen alue{% endif %}
+<hr>
+{% endfor %}
+<br><br>
+<h5><a href="/admin/newarea">Luo uusi keskustelualue</a></h5>
 {% endblock content %}
-

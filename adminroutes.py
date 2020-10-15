@@ -4,7 +4,7 @@ import users, areas, topics, messages, admins
 
 @app.route("/admin")
 def admin():
-    return render_template("adindex.html")
+    return render_template("adindex.html", login="yes")
 
 # Admin päävalikko
 @app.route("/admin/menu")
@@ -16,16 +16,16 @@ def ad_menu():
 @app.route("/admin/areas")
 def ad_list_areas():
     admin_name = admins.get_adminname()
-    list = areas.get_areas_all()
-    return render_template("adareas.html", admin_name=admin_name, areas=list)
+    alist = areas.get_areas_all()
+    return render_template("adareas.html", admin_name=admin_name, areas=alist)
 
 # Viestiketjujen listaus
 @app.route("/admin/topics/<int:area_id>")
 def ad_list_topics(area_id):
     admin_name = admins.get_adminname()
     area_name = areas.get_areaname(area_id)
-    list = topics.get_topics(area_id)
-    return render_template("adtopics.html", admin_name=admin_name, area_id=area_id, area_name=area_name, topics=list)
+    tlist = topics.get_topics(area_id)
+    return render_template("adtopics.html", admin_name=admin_name, area_id=area_id, area_name=area_name, topics=tlist)
 
 # Viestien hallinta
 @app.route("/admin/messages/<int:topic_id>")
@@ -85,20 +85,21 @@ def ad_topicsend(area_id):
 @app.route("/adlogin", methods=["get","post"])
 def ad_login():
     if request.method == "GET":
-        return render_template("adlogin.html")
+        return render_template("adlogin.html", login="yes")
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
         if admins.login(username,password):
             return redirect("/admin/menu")
         else:
-            return render_template("error.html",message="Väärä tunnus tai salasana")
+            error = "Väärä tunnus tai salasana"
+            return render_template("adlogin.html", login="yes", error=error)
 
 # Admin logout
 @app.route("/adlogout")
 def ad_logout():
     admins.logout()
-    return redirect("/")
+    return render_template("adlogout.html", login="yes")
 
 # Uusi admin käyttäjä
 @app.route("/adregister", methods=["get","post"])

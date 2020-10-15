@@ -7,8 +7,9 @@
         Salasana: <input type="password" name="password">
         <br><br>
         <input type="submit" value="Kirjaudu">
-        <br><br>
+        <br>
         </form>
-    Jos sinulla ei ole tunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a>
+        <br><div style="color:red;" >{{ error }}</div><br>
+        Jos sinulla ei ole tunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a>
     
 {% endblock content %}

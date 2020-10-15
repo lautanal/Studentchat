@@ -1,13 +1,11 @@
 {% extends "adlayout.html" %}
 {% block content %}
-    <h2>{{ area_name }}</h2>
+    <h3>{{ area_name }}</h3>
     <hr>
     {% for topic in topics %}
-        <p>
-            <a href="/admin/messages/{{ topic[0] }}">{{ topic[1] }}</a>
-        <p>
+        <h5><a href="/admin/messages/{{ topic[0] }}">{{ topic[1] }}</a></h5>
         <hr>
     {% endfor %}
-    <br>
-    <h4><a href="/admin/newtopic/{{ area_id }}">Aloita uusi viestiketju</a></h4>
+    <br><br>
+    <h4><a href="/admin/newtopic/{{ area_id }}">Aloita uusi keskustelu</a></h4>
 {% endblock content %}

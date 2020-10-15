@@ -1,21 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
-    <form action="/sendreply/{{ message_id }}" method="post">
-        {{ author }} kirjoitti:
-        <br>
-        <label>
-            {{ message }}
-        </label>
-        <br>
-        <br>
-        Viesti: <br>
-        <textarea name="content" rows="5" cols="50">{{ content }}</textarea>
-        <br>
-        <input type="submit" value="Lähetä">
-    </form>
+<form action="/sendreply/{{ message_id }}" method="post">
+    {{ author }} kirjoitti:
     <br>
-    {% if error %}
-        <p class=error><strong>Virhe:</strong> {{ error }}
-    {% endif %}
+    <label>
+        {{ message }}
+    </label>
+    <br><br>
+    Viesti: <br>
+    <textarea name="content" rows="5" cols="50">{{ content }}</textarea>
+    <br>
+    <input type="submit" value="Lähetä">
+</form>
+<br>
+<br><div style="color:red;" >{{ error }}</div><br>
 
 {% endblock content %}
