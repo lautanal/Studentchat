@@ -173,12 +173,18 @@ def newtopic(area_id):
 @app.route("/topicsend/<int:area_id>", methods=["post"])
 def topicsend(area_id):
     topic_name = request.form["topicname"]
+    content = request.form["content"]
     if isBlank(topic_name) :
-            return render_template("newtopic.html", area_id=area_id, error="Tyhjä kenttä, viestiketjua ei aloitettu")
+            return render_template("newtopic.html", area_id=area_id, content=content, error="Syötä uuden viestiketjun otsikko")
+    if isBlank(content) :
+            return render_template("newtopic.html", area_id=area_id, topicname=topic_name, error="Syötä viesti")
     if topics.sendtopic(area_id, topic_name):
-        return redirect("/topics/"+str(area_id))
+        topic_id = topics.get_newtopic()
+        messages.insert(topic_id, content, None)
+        return redirect("/messages/"+str(topic_id))
+#        return redirect("/topics/"+str(area_id))
     else:
-        return render_template("error.html",message="Viestiketjun talletus ei onnistunut")
+        return render_template("newtopic.html", area_id=area_id, error="Viestiketjun aloitus ei onnistunut")
 
 # Login
 @app.route("/login", methods=["get","post"])

@@ -9,33 +9,47 @@ def admin():
 # Admin päävalikko
 @app.route("/admin/menu")
 def ad_menu():
-    admin_name = admins.get_adminname()
-    return render_template("admenu.html", admin_name=admin_name)
+#    admin_name = admins.get_adminname()
+    return render_template("admenu.html")
 
 # Keskustelualueiden hallinta
 @app.route("/admin/areas")
 def ad_list_areas():
-    admin_name = admins.get_adminname()
     alist = areas.get_areas_all()
-    return render_template("adareas.html", admin_name=admin_name, areas=alist)
+    return render_template("adareas.html", areas=alist)
 
 # Viestiketjujen listaus
 @app.route("/admin/topics/<int:area_id>")
 def ad_list_topics(area_id):
-    admin_name = admins.get_adminname()
     area_name = areas.get_areaname(area_id)
-    tlist = topics.get_topics(area_id)
-    return render_template("adtopics.html", admin_name=admin_name, area_id=area_id, area_name=area_name, topics=tlist)
+    tlist = topics.get_topics_all(area_id)
+    return render_template("adtopics.html", area_id=area_id, area_name=area_name, topics=tlist)
+
+# Viestiketjun sulkeminen
+@app.route("/admin/locktopic/<int:area_id>/<int:topic_id>")
+def ad_lock_topic(area_id, topic_id):
+    topics.lock_topic(topic_id)
+    area_name = areas.get_areaname(area_id)
+    tlist = topics.get_topics_all(area_id)
+    return render_template("adtopics.html", area_id=area_id, area_name=area_name, topics=tlist)
+
+# Viestiketjun avaaminen
+@app.route("/admin/opentopic/<int:area_id>/<int:topic_id>")
+def ad_open_topic(area_id, topic_id):
+    topics.open_topic(topic_id)
+    area_name = areas.get_areaname(area_id)
+    tlist = topics.get_topics_all(area_id)
+    return render_template("adtopics.html", area_id=area_id, area_name=area_name, topics=tlist)
 
 # Viestien hallinta
 @app.route("/admin/messages/<int:topic_id>")
 def ad_list_messages(topic_id):
-    admin_name = admins.get_adminname()
+#    admin_name = admins.get_adminname()
     area_id = topics.get_area_id(topic_id)
     area_name = areas.get_areaname(area_id)
     topic_name = topics.get_topicname(topic_id)
     list = messages.get_messages(topic_id)
-    return render_template("admessages.html", admin_name=admin_name, area_id=area_id, area_name=area_name, topic_id=topic_id, topic_name=topic_name, count=len(list), messages=list)
+    return render_template("admessages.html", area_id=area_id, area_name=area_name, topic_id=topic_id, topic_name=topic_name, count=len(list), messages=list)
 
 # Uusi keskustelualue
 @app.route("/admin/newarea")

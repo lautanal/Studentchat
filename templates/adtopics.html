@@ -2,10 +2,19 @@
 {% block content %}
     <h3>{{ area_name }}</h3>
     <hr>
-    {% for topic in topics %}
-        <h5><a href="/admin/messages/{{ topic[0] }}">{{ topic[1] }}</a></h5>
-        <hr>
-    {% endfor %}
+        {% for topic in topics %}
+            <h5><a href="/admin/messages/{{ topic[0] }}">{{ topic[1] }}</a></h5>
+            {% if topic[2] == true %}
+                Suljettu<br>
+                <a href="/admin/opentopic/{{ area_id }}/{{ topic[0] }}">Avaa keskustelu</a>
+            {% else %}
+                Avoinna<br>
+                <a href="/admin/locktopic/{{ area_id }}/{{ topic[0] }}">Sulje keskustelu</a>
+            {% endif %}
+            <hr>
+        {% endfor %}
+    </table>
     <br><br>
-    <h4><a href="/admin/newtopic/{{ area_id }}">Aloita uusi keskustelu</a></h4>
+<!--   <h4><a href="/admin/newtopic/{{ area_id }}">Aloita uusi keskustelu</a></h4>
+-->
 {% endblock content %}

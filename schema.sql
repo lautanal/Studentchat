@@ -1,12 +1,14 @@
 CREATE TABLE areas (
     id SERIAL PRIMARY KEY,
     areaname TEXT,
-    hidden BOOLEAN
+    hidden BOOLEAN,
+    locked BOOLEAN
 );
 CREATE TABLE topics (
     id SERIAL PRIMARY KEY,
     topicname TEXT,
-    area_id INTEGER REFERENCES areas
+    area_id INTEGER REFERENCES areas,
+    locked BOOLEAN
 );
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,

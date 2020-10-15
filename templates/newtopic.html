@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
     <form action="/topicsend/{{ area_id }}" method="post">
-        Viestiketjun otsikko: <input type="text" name="topicname">
-        <p>
+        Viestiketjun otsikko: <input type="text" name="topicname" value={{ topicname }}>
+        <br>
+        Viesti: <br>
+        <textarea name="content" rows="5" cols="50">{{ content }}</textarea>
         <input type="submit" value="Lähetä">
     </form>
     <br><div style="color:red;" >{{ error }}</div><br>
