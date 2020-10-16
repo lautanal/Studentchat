@@ -27,11 +27,12 @@ def list_topics(area_id):
 @app.route("/messages/<int:topic_id>")
 def list_messages(topic_id):
     login_id = users.login_id()
+    user_rights = users.get_userrights(login_id)
     topic_name = topics.get_topicname(topic_id)
     area_id = topics.get_area_id(topic_id)
     area_name = areas.get_areaname(area_id)
     mlist = messages.get_messages(topic_id)
-    return render_template("messages.html", login_id=login_id, area_id=area_id, area_name=area_name, topic_id=topic_id, topic_name=topic_name, count=len(mlist), messages=mlist)
+    return render_template("messages.html", login_id=login_id, user_rights=user_rights, area_id=area_id, area_name=area_name, topic_id=topic_id, topic_name=topic_name, count=len(mlist), messages=mlist)
     
 # viestien haku
 @app.route("/find")

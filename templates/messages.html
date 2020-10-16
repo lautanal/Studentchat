@@ -7,7 +7,8 @@
     <br><br>
     <h5><a href="/new/{{ topic_id }}">Kirjoita viesti</a></h5>
     <hr>
-    <div style="background-color: whitesmoke;">
+    <div>
+<!--   style="background-color: whitesmoke;"> --> 
         {% for message in messages %}
             {{ message[4].strftime("%Y-%m-%d %H:%M") }}
             {% if message[2] == login_id %}
@@ -35,6 +36,7 @@
                 </div>
                 <br>
                 <a href="/reply/{{ message[0] }}">Vastaa</a>
+                {% if user_rights == 3 %}<a href="/messagedel/{{ message[0] }}">Poista</a>{% endif %}
             {% endif %}
             <p>
             <hr>
