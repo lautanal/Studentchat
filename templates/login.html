@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="jumbotron">
     <form action="/login" method="post">
         <h2>Kirjaudu sisään</h2>
         Tunnus: <input type="text" name="username">
@@ -11,5 +12,5 @@
         </form>
         <br><div style="color:red;" >{{ error }}</div><br>
         Jos sinulla ei ole tunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a>
-    
+</div>   
 {% endblock content %}

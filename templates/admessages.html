@@ -1,5 +1,6 @@
 {% extends "adlayout.html" %}
 {% block content %}
+<div class="jumbotron">
     <h3><a href="/admin/topics/{{ area_id }}">{{ area_name }}</a></h3>
     <h4>{{ topic_name }}</h4>
     Viestien määrä: {{ count }}
@@ -11,12 +12,12 @@
             <div style="background-color: lightgray;">
                 {{ message[5] }}
             </div>
-            <br>
         {% endif %}
         {{ message[1] }}
-        <p>
-        <a href="/admin/messagedel/{{ message[0] }}">Poista</a>
-        <p>
+        <div>
+            <a href="/admin/messagedel/{{ message[0] }}">Poista</a>
+        </div>
         <hr>
     {% endfor %}
+</div>
 {% endblock content %}

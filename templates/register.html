@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="jumbotron">
     <form action="/register" method="post">
         <h2>Luo uusi käyttäjätunnus</h2>
         Tunnus: <input type="text" name="username" value={{ username }}>
@@ -13,4 +14,5 @@
         <input type="submit" value="Luo tunnus">
     </form>
     <br><div style="color:red;" >{{ error }}</div><br>
-    {% endblock content %}
+</div>
+{% endblock content %}

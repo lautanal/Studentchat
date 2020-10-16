@@ -1,9 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="jumbotron">
     <form action="/update/{{ message_id }}" method="post">
         Viesti: <br>
         <textarea name="content" rows="5" cols="50">{{ content }}</textarea>
         <br>
         <input type="submit" value="Talleta">
     </form>
+</div>
 {% endblock content %}

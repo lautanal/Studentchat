@@ -1,5 +1,6 @@
 {% extends "adlayout.html" %}
 {% block content %}
+<div class="jumbotron">
     <hr>
         Käyttäjätunnus: {{ user_name }}
         <p>
@@ -7,13 +8,14 @@
         <p>
         <form action="/admin/usersave/{{ user_id }}" method="POST">
             Käyttöoikeudet:
-            <p>
-            <input type="radio" name="privileges" value="0" {% if user_rights  == 0 %} checked {% endif %} > Käyttö estetty
-            <input type="radio" name="privileges" value="1" {% if user_rights  == 1 %} checked {% endif %} > Peruskäyttäjä
-            <input type="radio" name="privileges" value="2" {% if user_rights  == 2 %} checked {% endif %} > Pääsy salaisille alueille
-            <input type="radio" name="privileges" value="3" {% if user_rights  == 3 %} checked {% endif %} > Moderaattori
-            <p>
+            <br>
+            <input type="radio" name="privileges" value="0" {% if user_rights  == 0 %} checked {% endif %} > Käyttö estetty<br>
+            <input type="radio" name="privileges" value="1" {% if user_rights  == 1 %} checked {% endif %} > Peruskäyttäjä<br>
+            <input type="radio" name="privileges" value="2" {% if user_rights  == 2 %} checked {% endif %} > Pääsy salaisille alueille<br>
+            <input type="radio" name="privileges" value="3" {% if user_rights  == 3 %} checked {% endif %} > Moderaattori<br>
+            <br>
             <input type="submit" value="Talleta">
         </form>
     <hr>
+    </div>
 {% endblock content %}

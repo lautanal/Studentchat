@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="jumbotron">
     <h3><a href="/topics/{{ area_id }}">{{ area_name }}</a></h3>
     <h4>{{ topic_name }}</h4>
     Viestien määrä: {{ count }}
@@ -15,7 +16,6 @@
                     <div style="background-color: lightgray;">
                         {{ message[5] }}
                     </div>
-                    <br>
                 {% endif %}
                 <div style="white-space: pre-line">
                     {{ message[1] }}
@@ -29,7 +29,6 @@
                     <div style="background-color: lightgray;">
                         {{ message[5] }}
                     </div>
-                    <br>
                 {% endif %}
                 <div style="white-space: pre-line">
                     {{ message[1] }}
@@ -41,4 +40,5 @@
             <hr>
         {% endfor %}
     </div>
+</div>
 {% endblock content %}

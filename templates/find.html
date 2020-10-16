@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="jumbotron">
     <form action="/findmsg" method="post">
         Hae viestejä<br>
         Viestin kirjoittaja: <input type="text" name="user_search"> &nbsp
@@ -10,4 +11,5 @@
             <span class=error><strong>Virhe:</strong> {{ error }}</span>
         {% endif %}
     </form>
+</div>
 {% endblock content %}

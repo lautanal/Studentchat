@@ -1,9 +1,12 @@
 {% extends "adlayout.html" %}
 {% block content %}
+<div class="jumbotron">
     <form action="/admin/topicsend/{{ area_id }}" method="post">
         Viestiketjun otsikko: <input type="text" name="topicname">
         <p>
         <input type="submit" value="Lähetä">
     </form>
-    <br><div style="color:red;" >{{ error }}</div><br>
+    <br>
+    <div style="color:red;" >{{ error }}</div>
+</div>
 {% endblock content %}

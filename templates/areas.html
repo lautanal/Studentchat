@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-    {% for area in areas %}
+<div class="jumbotron">
+  {% for area in areas %}
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
@@ -9,4 +10,5 @@
           </div>
         </article>
     {% endfor %}
+</div>
 {% endblock content %}

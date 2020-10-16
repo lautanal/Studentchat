@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="jumbotron">
     <form 
         {% if (text_search == "") or (text_search == " ") %}
             action=
@@ -15,4 +16,5 @@
         <br>
         <input type="submit" value="Talleta">
     </form>
+</div>
 {% endblock content %}

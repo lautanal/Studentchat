@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="jumbotron">
     <h3>{{ area_name }}</h3>
     <hr>
     {% for topic in topics %}
@@ -8,4 +9,5 @@
     {% endfor %}
     <br><br>
     <h5><a href="/newtopic/{{ area_id }}">Aloita uusi keskustelu</a></h5>
+</div>
 {% endblock content %}

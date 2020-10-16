@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+<div class="jumbotron">
     <form action="/topicsend/{{ area_id }}" method="post">
         Viestiketjun otsikko: <input type="text" name="topicname" value={{ topicname }}>
         <br>
@@ -8,4 +9,5 @@
         <input type="submit" value="Lähetä">
     </form>
     <br><div style="color:red;" >{{ error }}</div><br>
+</div>
 {% endblock content %}

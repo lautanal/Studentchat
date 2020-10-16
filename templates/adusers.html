@@ -1,5 +1,6 @@
 {% extends "adlayout.html" %}
 {% block content %}
+<div class="jumbotron">
     {% for user in userlist %}
         Käyttäjätunnus: {{ user[1] }} &nbsp;&nbsp; Nimi: {{ user[2] }}
         &nbsp;&nbsp;
@@ -8,9 +9,10 @@
             {% if user[3]  == 1 %} peruskäyttäjä {% endif %}
             {% if user[3]  == 2 %} pääsy salaisille alueille {% endif %}
             {% if user[3]  == 3 %} moderaattori {% endif %}
-        <p>   
-        <a href="/admin/usermod/{{ user[0] }}">Muuta</a>
-        <p>
+        <div>   
+            <a href="/admin/usermod/{{ user[0] }}">Muuta</a>
+        </div>
         <hr>
     {% endfor %}
+</div>
 {% endblock content %}
