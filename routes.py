@@ -179,7 +179,6 @@ def send_reply(message_id):
     ref_msg = author + " kirjoitti: \n" + message
     content = request.form["content"]
     if isBlank(content) :
-#            return render_template("error.html",message="Tyhjä kenttä, viestiä ei talletettu")
         return render_template("reply.html", content="", message_id=message_id, author=author, message=message,error="Tyhjä kenttä, viestiä ei talletettu")
     if messages.insert(topic_id, content, ref_msg):
         return redirect("/messages/"+str(topic_id))
@@ -204,7 +203,6 @@ def topicsend(area_id):
         topic_id = topics.get_newtopic()
         messages.insert(topic_id, content, None)
         return redirect("/messages/"+str(topic_id))
-#        return redirect("/topics/"+str(area_id))
     else:
         return render_template("newtopic.html", area_id=area_id, error="Viestiketjun aloitus ei onnistunut")
 

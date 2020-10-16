@@ -63,7 +63,6 @@ def areasend():
     hidden = request.form["hidden"]
     if isBlank(area_name) :
             return render_template("newarea.html",error="Tyhjä kenttä, keskustelualuetta ei aloitettu")
-#            return render_template("error.html",message="Tyhjä kenttä, keskustelualuetta ei aloitettu")
     if areas.sendarea(area_name, hidden):
         return redirect("/admin/areas")
     else:
@@ -89,7 +88,6 @@ def ad_topicsend(area_id):
     topic_name = request.form["topicname"]
     if isBlank(topic_name) :
             return render_template("adnewtopic.html", area_id=area_id, error="Tyhjä kenttä, viestiketjua ei aloitettu")
-#            return render_template("error.html",message="Tyhjä kenttä, viestiketjua ei aloitettu")
     if topics.sendtopic(area_id, topic_name):
         return redirect("/admin/topics/"+str(area_id))
     else:

@@ -67,20 +67,6 @@ def find_messages(user_alias, topic, content):
         result = db.session.execute(sql, {"user_alias":user_alias, "content":content, "topic":topic})
     return result.fetchall()
 
-def find_messages_2(user_alias, content):
-    user_alias = "%" + user_alias + "%"
-    content = "%" + content + "%"
-    if (user_alias == ""):
-        sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message FROM messages M, users U WHERE M.visible = true AND M.user_id=U.id AND LOWER(M.content) LIKE LOWER(:content) ORDER BY M.id"
-        result = db.session.execute(sql, {"content":content})
-    elif(content == ""):
-        sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message FROM messages M, users U WHERE M.visible = true AND M.user_id=U.id AND LOWER(U.alias) LIKE LOWER(:user_alias) ORDER BY M.id"
-        result = db.session.execute(sql, {"user_alias":user_alias})
-    else:
-        sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message FROM messages M, users U WHERE M.visible = true AND M.user_id=U.id AND LOWER(U.alias) LIKE LOWER(:user_alias) AND LOWER(M.content) LIKE LOWER(:content)  ORDER BY M.id"
-        result = db.session.execute(sql, {"user_alias":user_alias, "content":content})
-    return result.fetchall()
-
 # Uuden viestin talletus tietokantaan
 def insert(topic_id, content, ref_msg):
     login_id = users.login_id()
