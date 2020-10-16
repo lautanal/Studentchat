@@ -10,7 +10,7 @@ Peruskäyttäjä voi:
 - Muokata ja poistaa omia viestejä
 - Hakea viestejä kirjoittajan, keskustelualueen tai viestin sisältämän tekstin perusteella
 - Aloittaa uusia keskusteluja
-- Ylläpitäjän salliessa päästä salaisille alueille
+- Päästä salaisille alueille ylläpitäjän salliessa
 - Olla moderaattorina ylläpitäjän salliessa
 
 Ylläpitäjä voi:
