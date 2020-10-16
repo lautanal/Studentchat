@@ -1,11 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="jumbotron">
-    <form action="/register" method="post">
+        <form action="/register" method="post">
         <h2>Luo uusi käyttäjätunnus</h2>
-        Tunnus: <input type="text" name="username" value={{ username }}>
+        <br>
+        Tunnus: &nbsp <input type="text" name="username" value={{ username }}>
         <br><br>
-        Nimi: <input type="text" name="alias" value={{ alias }}> (näkyy muille käyttäjille)
+        Nimi: &nbsp &nbsp &nbsp &nbsp <input type="text" name="alias" value={{ alias }}> (näkyy muille käyttäjille)
         <br><br>
         Salasana: <input type="password" name="password">
         <br><br>

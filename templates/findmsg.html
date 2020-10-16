@@ -4,8 +4,9 @@
     Löydettyjen viestien määrä: {{ count }}
     <br><br>
     <hr>
-    <div style="background-color: whitesmoke;">
+    <div>
         {% for message in messages %}
+            <h5>{{ message[6] }}</h5>
             {{ message[4].strftime("%Y-%m-%d %H:%M") }}
             {% if message[2] == login_id %}
                 <h5 style="color:red;"><i>{{ message[3] }}:</i></h5>
@@ -19,18 +20,8 @@
                     {{ message[1] }}
                 </div>
                 <p>
-                {% if (user_search == "") or (user_search == " ") %}
-                    <a href="/modify2/{{ message[0] }}/%20/{{ text_search }}">Muuta</a>
-                    <a href="/messagedel2/{{ message[0] }}/%20/{{ text_search }}">Poista</a>
-                {% else %}
-                    {% if (text_search == "") or (text_search == " ") %}
-                        <a href="/modify2/{{ message[0] }}/{{ user_search }}/%20">Muuta</a>
-                        <a href="/messagedel2/{{ message[0] }}/{{ user_search }}/%20">Poista</a>
-                    {% else %}
-                        <a href="/modify2/{{ message[0] }}/{{ user_search }}/{{ text_search }}">Muuta</a>
-                        <a href="/messagedel2/{{ message[0] }}/{{ user_search }}/{{ text_search }}">Poista</a>
-                    {% endif %}
-                {% endif %}
+                <a href="/modify2/{{ message[0] }}/{{ user_search }}/{{ topic_search }}/{{ text_search }}">Muuta</a>
+                <a href="/messagedel2/{{ message[0] }}/{{ user_search }}/{{ topic_search }}/{{ text_search }}">Poista</a>
             {% else %}
                 <h5 style="color:blue;"><b><i>{{ message[3] }}:</i></b></h5>
                 {% if message[5] != None %}
@@ -44,6 +35,7 @@
                 </div>
                 <p>
                 <a href="/reply/{{ message[0] }}">Vastaa</a>
+                {% if user_rights == 3 %}<a href="/messagedel/{{ message[0] }}">Poista</a>{% endif %}
             {% endif %}
             <p>
             <hr>

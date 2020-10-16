@@ -2,14 +2,13 @@
 {% block content %}
 <div class="jumbotron">
     <form action="/findmsg" method="post">
-        Hae viestejä<br>
-        Viestin kirjoittaja: <input type="text" name="user_search"> &nbsp
-        Etsittävä teksti: <input type="text" name="text_search"> &nbsp &nbsp
+        Hae viestejä<br><br>
+        Viestin kirjoittaja: <input type="text" name="user_search"><br><br>
+        Keskustelun otsikko: <input type="text" name="topic_search"><br><br>
+        Viestin teksti: <input type="text" name="text_search"><br><br>
         <input type="submit" value="Etsi">
         <br><br>
-        {% if error %}
-            <span class=error><strong>Virhe:</strong> {{ error }}</span>
-        {% endif %}
     </form>
+    <br><div style="color:red;" >{{ error }}</div><br>
 </div>
 {% endblock content %}

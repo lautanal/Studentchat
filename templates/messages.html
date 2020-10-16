@@ -8,9 +8,8 @@
     <h5><a href="/new/{{ topic_id }}">Kirjoita viesti</a></h5>
     <hr>
     <div>
-<!--   style="background-color: whitesmoke;"> --> 
         {% for message in messages %}
-            {{ message[4].strftime("%Y-%m-%d %H:%M") }}
+        {{ message[4].strftime("%Y-%m-%d %H:%M") }}
             {% if message[2] == login_id %}
                 <h5 style="color:red;"><i>{{ message[3] }}:</i></h5>
                 {% if message[5] != None %}

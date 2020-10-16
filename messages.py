@@ -26,7 +26,48 @@ def get_messages(topic_id):
     return result.fetchall()
 
 # Viestien haku tietojen perusteella
-def find_messages(user_alias, content):
+def find_messages(user_alias, topic, content):
+    user_alias = "%" + user_alias + "%"
+    content = "%" + content + "%"
+    topic = "%" + topic + "%"
+    if user_alias == "" and topic == "":
+        sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message, T.topicname FROM messages M, users U, topics T " \
+            "WHERE M.visible = true AND M.user_id=U.id AND M.topic_id=T.id " \
+            "AND LOWER(M.content) LIKE LOWER(:content) ORDER BY M.id"
+        result = db.session.execute(sql, {"content":content})
+    elif content == "" and topic == "":
+        sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message, T.topicname FROM messages M, users U, topics T " \
+            "WHERE M.visible = true AND M.user_id=U.id AND M.topic_id=T.id " \
+            "AND LOWER(U.alias) LIKE LOWER(:user_alias) ORDER BY M.id"
+        result = db.session.execute(sql, {"user_alias":user_alias})
+    elif content == "" and user_alias == "":
+        sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message, T.topicname FROM messages M, users U, topics T " \
+            "WHERE M.visible = true AND M.user_id=U.id AND M.topic_id=T.id " \
+            "AND LOWER(T.topicname) LIKE LOWER(:topic) ORDER BY M.id"
+        result = db.session.execute(sql, {"topic":topic})
+    elif topic == "":
+        sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message, T.topicname FROM messages M, users U, topics T "\
+            "WHERE M.visible = true AND M.user_id=U.id AND M.topic_id=T.id " \
+            "AND LOWER(M.content) LIKE LOWER(:content) AND LOWER(U.alias) LIKE LOWER(:user_alias) ORDER BY M.id"
+        result = db.session.execute(sql, {"content":content, "user_alias":user_alias})
+    elif user_alias == "":
+        sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message, T.topicname FROM messages M, users U, topics T "\
+            "WHERE M.visible = true AND M.user_id=U.id AND M.topic_id=T.id " \
+            "AND LOWER(M.content) LIKE LOWER(:content) AND LOWER(T.topicname) LIKE LOWER(:topic) ORDER BY M.id"
+        result = db.session.execute(sql, {"topic":topic, "content":content})
+    elif content == "":
+        sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message, T.topicname FROM messages M, users U, topics T "\
+            "WHERE M.visible = true AND M.user_id=U.id AND M.topic_id=T.id " \
+            "AND LOWER(U.alias) LIKE LOWER(:user_alias) AND LOWER(T.topicname) LIKE LOWER(:topic) ORDER BY M.id"
+        result = db.session.execute(sql, {"user_alias":user_alias, "topic":topic})
+    else:
+        sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message, T.topicname FROM messages M, users U, topics T "\
+            "WHERE M.visible = true AND M.user_id=U.id AND M.topic_id=T.id " \
+            "AND LOWER(U.alias) LIKE LOWER(:user_alias) AND LOWER(M.content) LIKE LOWER(:content) AND LOWER(T.topicname) LIKE LOWER(:topic) ORDER BY M.id"
+        result = db.session.execute(sql, {"user_alias":user_alias, "content":content, "topic":topic})
+    return result.fetchall()
+
+def find_messages_2(user_alias, content):
     user_alias = "%" + user_alias + "%"
     content = "%" + content + "%"
     if (user_alias == ""):

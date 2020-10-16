@@ -1,16 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="jumbotron">
-    <form 
-        {% if (text_search == "") or (text_search == " ") %}
-            action=
-                "/update2/{{ message_id }}/{{ user_search }}/%20"
-                method="post">
-        {% else %}
-            action=
-                "/update2/{{ message_id }}/{{ user_search }}/{{ text_search }}"
-                method="post">
-        {% endif %}
+    <form action="/update2/{{ message_id }}/{{ user_search }}/{{ topic_search }}/{{ text_search }}" method="post">
         Viesti: <br>
         <textarea name="content" rows="5" cols="50">{{ content }}</textarea>
         <br>

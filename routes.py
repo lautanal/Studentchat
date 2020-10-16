@@ -43,12 +43,20 @@ def find():
 @app.route("/findmsg", methods=["post"])
 def findmsg():
     login_id = users.login_id()
+    user_rights = users.get_userrights(login_id)
     user_search = request.form["user_search"].strip()
+    topic_search = request.form["topic_search"].strip()
     text_search = request.form["text_search"].strip()
-    if isBlank(user_search) and isBlank(text_search) :
-        return render_template("find.html",error="Tyhjät kentät, hakua ei tehty")
-    mlist = messages.find_messages(user_search, text_search)
-    return render_template("findmsg.html", login_id=login_id, count=len(mlist), messages=mlist, user_search=user_search, text_search=text_search)
+    if isBlank(user_search) and isBlank(topic_search) and isBlank(text_search) :
+        return render_template("find.html",error="Täytä hakukentät")
+    mlist = messages.find_messages(user_search, topic_search, text_search)
+    if user_search == "":
+        user_search = "%20"
+    if topic_search == "":
+        topic_search = "%20"
+    if text_search == "":
+        text_search = "%20"
+    return render_template("findmsg.html", login_id=login_id, user_rights=user_rights, count=len(mlist), messages=mlist, user_search=user_search, topic_search=topic_search, text_search=text_search)
 
 # Uusi viesti
 @app.route("/new/<int:topic_id>")
@@ -85,23 +93,40 @@ def update(message_id):
         return render_template("error.html",message="Viestin talletus ei onnistunut")
 
 # Viestin muuttaminen, paluu etsintäsivulle
-@app.route("/modify2/<int:message_id>/<string:user_search>/<string:text_search>")
-def modify2(message_id, user_search, text_search):
+@app.route("/modify2/<int:message_id>/<string:user_search>/<string:topic_search>/<string:text_search>")
+def modify2(message_id, user_search, topic_search, text_search):
+    user_search = user_search.strip()
+    topic_search = topic_search.strip()
+    text_search = text_search.strip()
     content = messages.read_message(message_id)
+    if user_search == "":
+        user_search = "%20"
+    if topic_search == "":
+        topic_search = "%20"
     if text_search == "":
         text_search = "%20"
-    return render_template("modify2.html", message_id=message_id, content=content, user_search=user_search, text_search=text_search)
+    return render_template("modify2.html", message_id=message_id, content=content, user_search=user_search, topic_search=topic_search, text_search=text_search)
 
 # Muutetun viestin talletus tietokantaan, paluu etsintäsivulle
-@app.route("/update2/<int:message_id>/<string:user_search>/<string:text_search>", methods=["post"])
-def update2(message_id, user_search, text_search):
+@app.route("/update2/<int:message_id>/<string:user_search>/<string:topic_search>/<string:text_search>", methods=["post"])
+def update2(message_id, user_search, topic_search, text_search):
+    user_search = user_search.strip()
+    topic_search = topic_search.strip()
+    text_search = text_search.strip()
     content = request.form["content"]
     if isBlank(content) :
             return render_template("error.html",message="Tyhjä kenttä, syötä viesti")
     if messages.update(message_id, content):
         login_id = users.login_id()
-        list = messages.find_messages(user_search.strip(), text_search.strip())
-        return render_template("findmsg.html", login_id=login_id, count=len(list), messages=list, user_search=user_search, text_search=text_search)
+        user_rights = users.get_userrights(login_id)
+        mlist = messages.find_messages(user_search, topic_search, text_search)
+        if user_search == "":
+            user_search = "%20"
+        if text_search == "":
+            text_search = "%20"
+        if topic_search == "":
+            topic_search = "%20"
+        return render_template("findmsg.html", login_id=login_id, user_rights=user_rights, count=len(mlist), messages=mlist, user_search=user_search, topic_search=topic_search, text_search=text_search)
     else:
         return render_template("error.html",message="Viestin talletus ei onnistunut")
 
@@ -115,14 +140,23 @@ def deletem(message_id):
         return render_template("error.html",message="Viestin poisto ei onnistunut")
 
 # Viestin poisto, paluu etsintäsivulle
-@app.route("/messagedel2/<int:message_id>/<string:user_search>/<string:text_search>")
-def deletem2(message_id, user_search, text_search):
+@app.route("/messagedel2/<int:message_id>/<string:user_search>/<string:topic_search>/<string:text_search>")
+def deletem2(message_id, user_search, topic_search, text_search):
+    user_search = user_search.strip()
+    topic_search = topic_search.strip()
+    text_search = text_search.strip()
     topic_id = messages.get_topic_id(message_id)
     if messages.delete(message_id):
         login_id = users.login_id()
-        login_alias = users.get_useralias(login_id)
-        list = messages.find_messages(user_search.strip(), text_search.strip())
-        return render_template("findmsg.html", login_id=login_id, count=len(list), messages=list, user_search=user_search, text_search=text_search)
+        user_rights = users.get_userrights(login_id)
+        mlist = messages.find_messages(user_search, topic_search, text_search)
+        if user_search == "":
+            user_search = "%20"
+        if topic_search == "":
+            topic_search = "%20"
+        if text_search == "":
+            text_search = "%20"
+        return render_template("findmsg.html", login_id=login_id, user_rights=user_rights, count=len(mlist), messages=mlist, user_search=user_search, topic_search=topic_search, text_search=text_search)
     else:
         return render_template("error.html",message="Viestin poisto ei onnistunut")
 
