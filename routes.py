@@ -11,7 +11,6 @@ def index():
 @app.route("/areas")
 def list_areas():
     login_id = users.login_id()
-    login_alias = users.get_useralias(login_id)
     user_rights = users.get_userrights(login_id)
     alist = areas.get_areas(user_rights)
     return render_template("areas.html", areas=alist)
@@ -20,7 +19,6 @@ def list_areas():
 @app.route("/topics/<int:area_id>")
 def list_topics(area_id):
     login_id = users.login_id()
-    login_alias = users.get_useralias(login_id)
     area_name = areas.get_areaname(area_id)
     tlist = topics.get_topics(area_id)
     return render_template("topics.html", area_id=area_id, area_name=area_name, topics=tlist)
@@ -29,37 +27,27 @@ def list_topics(area_id):
 @app.route("/messages/<int:topic_id>")
 def list_messages(topic_id):
     login_id = users.login_id()
-    login_alias = users.get_useralias(login_id)
     topic_name = topics.get_topicname(topic_id)
     area_id = topics.get_area_id(topic_id)
     area_name = areas.get_areaname(area_id)
-    list = messages.get_messages(topic_id)
-#    print("VIESTILISTA:")
-#    print(len(list))
-    return render_template("messages.html", login_id=login_id, area_id=area_id, area_name=area_name, topic_id=topic_id, topic_name=topic_name, count=len(list), messages=list)
+    mlist = messages.get_messages(topic_id)
+    return render_template("messages.html", login_id=login_id, area_id=area_id, area_name=area_name, topic_id=topic_id, topic_name=topic_name, count=len(mlist), messages=mlist)
     
 # viestien haku
 @app.route("/find")
 def find():
-    login_id = users.login_id()
-    login_alias = users.get_useralias(login_id)
     return render_template("find.html")
 
 # Viestien haku tekstin perusteella
 @app.route("/findmsg", methods=["post"])
 def findmsg():
     login_id = users.login_id()
-    login_alias = users.get_useralias(login_id)
     user_search = request.form["user_search"].strip()
     text_search = request.form["text_search"].strip()
     if isBlank(user_search) and isBlank(text_search) :
         return render_template("find.html",error="Tyhjät kentät, hakua ei tehty")
-    list = messages.find_messages(user_search, text_search)
-#    if user_search == "":
-#       user_search = "%20"
-#    if text_search == "":
-#        text_search = "%20"
-    return render_template("findmsg.html", login_id=login_id, count=len(list), messages=list, user_search=user_search, text_search=text_search)
+    mlist = messages.find_messages(user_search, text_search)
+    return render_template("findmsg.html", login_id=login_id, count=len(mlist), messages=mlist, user_search=user_search, text_search=text_search)
 
 # Uusi viesti
 @app.route("/new/<int:topic_id>")
@@ -108,12 +96,11 @@ def modify2(message_id, user_search, text_search):
 def update2(message_id, user_search, text_search):
     content = request.form["content"]
     if isBlank(content) :
-            return render_template("error.html",message="Tyhjä kenttä, viestin talletus ei onnistunut")
+            return render_template("error.html",message="Tyhjä kenttä, syötä viesti")
     if messages.update(message_id, content):
         login_id = users.login_id()
-        login_alias = users.get_useralias(login_id)
         list = messages.find_messages(user_search.strip(), text_search.strip())
-        return render_template("findmsg.html", login_id=login_id, login_alias=login_alias, count=len(list), messages=list, user_search=user_search, text_search=text_search)
+        return render_template("findmsg.html", login_id=login_id, count=len(list), messages=list, user_search=user_search, text_search=text_search)
     else:
         return render_template("error.html",message="Viestin talletus ei onnistunut")
 
@@ -134,7 +121,7 @@ def deletem2(message_id, user_search, text_search):
         login_id = users.login_id()
         login_alias = users.get_useralias(login_id)
         list = messages.find_messages(user_search.strip(), text_search.strip())
-        return render_template("findmsg.html", login_id=login_id, login_alias=login_alias, count=len(list), messages=list, user_search=user_search, text_search=text_search)
+        return render_template("findmsg.html", login_id=login_id, count=len(list), messages=list, user_search=user_search, text_search=text_search)
     else:
         return render_template("error.html",message="Viestin poisto ei onnistunut")
 

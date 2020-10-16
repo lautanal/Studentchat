@@ -7,14 +7,14 @@
         {% for message in messages %}
             {{ message[4].strftime("%Y-%m-%d %H:%M") }}
             {% if message[2] == login_id %}
-                <h3 style="color:red;"><i>{{ message[3] }}:</i></h3>
+                <h5 style="color:red;"><i>{{ message[3] }}:</i></h5>
                 {% if message[5] != None %}
                     <div style="background-color: lightgray;">
                         {{ message[5] }}
                     </div>
                     <br>
                 {% endif %}
-                <div>
+                <div style="white-space: pre-line">
                     {{ message[1] }}
                 </div>
                 <p>
@@ -31,14 +31,14 @@
                     {% endif %}
                 {% endif %}
             {% else %}
-                <h3 style="color:blue;"><b><i>{{ message[3] }}:</i></b></h3>
+                <h5 style="color:blue;"><b><i>{{ message[3] }}:</i></b></h5>
                 {% if message[5] != None %}
                     <div style="background-color: lightgray;">
                         {{ message[5] }}
                     </div>
                     <br>
                 {% endif %}
-                <div>
+                <div style="white-space: pre-line">
                     {{ message[1] }}
                 </div>
                 <p>

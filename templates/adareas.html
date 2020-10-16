@@ -1,7 +1,9 @@
 {% extends "adlayout.html" %}
 {% block content %}
 {% for area in areas %}
-<h5><a href="/admin/topics/{{ area[0] }}">{{ area[1] }}</a></h5>
+<h5>
+    <a href="/admin/topics/{{ area[0] }}">{{ area[1] }}</a>
+</h5>
 {% if area[2] %} &nbsp;&nbsp; Salainen alue{% endif %}
 <hr>
 {% endfor %}
