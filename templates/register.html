@@ -4,13 +4,13 @@
         <form action="/register" method="post">
         <h2>Luo uusi käyttäjätunnus</h2>
         <br>
-        Tunnus: &nbsp <input type="text" name="username" value={{ username }}>
+        <label for="username">Tunnus:</label><input type="text" id="username" name="username" value={{ username }}>
         <br><br>
-        Nimi: &nbsp &nbsp &nbsp &nbsp <input type="text" name="alias" value={{ alias }}> (näkyy muille käyttäjille)
+        <label for="alias">Nimi:</label><input type="text" id="alias" name="alias" value={{ alias }}> (näkyy muille käyttäjille)
         <br><br>
-        Salasana: <input type="password" name="password">
+        <label for="password">Salasana:</label><input type="password" id="password" name="password">
         <br><br>
-        Salasana: <input type="password" name="password2"> (varmistus)
+        <label for="password2">Salasana:</label><input type="password" id="password2" name="password2"> (varmennus)
         <br><br>
         <input type="submit" value="Luo tunnus">
     </form>

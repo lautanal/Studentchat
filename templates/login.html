@@ -1,17 +1,15 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="jumbotron">
-    <div class="container">
     <form action="/login" method="post">
         <h2>Kirjaudu sisään</h2>
-        Tunnus: &nbsp &nbsp<input type="text" name="username">
+        <label for="username">Tunnus</label><input type="text" id="username" name="username">
         <br><br>
-        Salasana: <input type="password" name="password">
+        <label for="password">Salasana:</label><input type="password" id="password" name="password">
         <br><br>
         <input type="submit" value="Kirjaudu">
         <br>
     </form>
-    </div>
     <br><div style="color:red;" >{{ error }}</div><br>
     Jos sinulla ei ole tunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a>
 </div>   

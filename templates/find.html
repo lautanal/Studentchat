@@ -3,12 +3,15 @@
 <div class="jumbotron">
     <form action="/findmsg" method="post">
         Hae viestejä<br><br>
-        Viestin kirjoittaja: <input type="text" name="user_search"><br><br>
-        Keskustelun otsikko: <input type="text" name="topic_search"><br><br>
-        Viestin sisältämä teksti: <input type="text" name="text_search"><br><br>
+        <label for="user_s">Viestin kirjoittaja:</label><input type="text" id="user_s" name="user_search"><br><br>
+        <label for="topic_s">Keskustelun otsikko:</label><input type="text" id="topic_s" name="topic_search"><br><br>
+        <label for="text_s">Viestin sisältämä teksti:</label><input type="text" id="text_s" name="text_search"><br><br>
         <input type="submit" value="Etsi">
         <br><br>
     </form>
     <br><div style="color:red;" >{{ error }}</div><br>
 </div>
 {% endblock content %}
+
+<label for="fname">First name:</label>
+<input type="text" id="fname" name="fname">
