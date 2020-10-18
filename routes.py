@@ -54,20 +54,23 @@ def find():
 @app.route("/findmsg", methods=["post"])
 def findmsg():
     login_id = users.login_id()
-    user_rights = users.get_userrights(login_id)
-    user_search = request.form["user_search"].strip()
-    topic_search = request.form["topic_search"].strip()
-    text_search = request.form["text_search"].strip()
-    if isBlank(user_search) and isBlank(topic_search) and isBlank(text_search) :
-        return render_template("find.html",error="Täytä hakukentät")
-    mlist = messages.find_messages(user_rights, user_search, topic_search, text_search)
-    if user_search == "":
-        user_search = "%20"
-    if topic_search == "":
-        topic_search = "%20"
-    if text_search == "":
-        text_search = "%20"
-    return render_template("findmsg.html", login_id=login_id, user_rights=user_rights, count=len(mlist), messages=mlist, user_search=user_search, topic_search=topic_search, text_search=text_search)
+    if login_id == 0:
+        return render_template("index.html", login="yes")
+    else:
+        user_rights = users.get_userrights(login_id)
+        user_search = request.form["user_search"].strip()
+        topic_search = request.form["topic_search"].strip()
+        text_search = request.form["text_search"].strip()
+        if isBlank(user_search) and isBlank(topic_search) and isBlank(text_search) :
+            return render_template("find.html",error="Täytä hakukentät")
+        mlist = messages.find_messages(user_rights, user_search, topic_search, text_search)
+        if user_search == "":
+            user_search = "%20"
+        if topic_search == "":
+            topic_search = "%20"
+        if text_search == "":
+            text_search = "%20"
+        return render_template("findmsg.html", login_id=login_id, user_rights=user_rights, count=len(mlist), messages=mlist, user_search=user_search, topic_search=topic_search, text_search=text_search)
 
 # Uusi viesti
 @app.route("/new/<int:topic_id>")
