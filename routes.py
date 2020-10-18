@@ -60,7 +60,7 @@ def findmsg():
     text_search = request.form["text_search"].strip()
     if isBlank(user_search) and isBlank(topic_search) and isBlank(text_search) :
         return render_template("find.html",error="Täytä hakukentät")
-    mlist = messages.find_messages(user_search, topic_search, text_search)
+    mlist = messages.find_messages(user_rights, user_search, topic_search, text_search)
     if user_search == "":
         user_search = "%20"
     if topic_search == "":
@@ -148,7 +148,7 @@ def update2(message_id, user_search, topic_search, text_search):
                 return render_template("error.html",message="Tyhjä kenttä, syötä viesti")
         if messages.update(message_id, content):
             user_rights = users.get_userrights(login_id)
-            mlist = messages.find_messages(user_search, topic_search, text_search)
+            mlist = messages.find_messages(user_rights, user_search, topic_search, text_search)
             if user_search == "":
                 user_search = "%20"
             if text_search == "":
@@ -184,7 +184,7 @@ def deletem2(message_id, user_search, topic_search, text_search):
         topic_id = messages.get_topic_id(message_id)
         if messages.delete(message_id):
             user_rights = users.get_userrights(login_id)
-            mlist = messages.find_messages(user_search, topic_search, text_search)
+            mlist = messages.find_messages(user_rights, user_search, topic_search, text_search)
             if user_search == "":
                 user_search = "%20"
             if topic_search == "":
