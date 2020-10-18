@@ -6,7 +6,7 @@
     <hr>
     <div>
         {% for message in messages %}
-            <h5>{{ message[6] }}</h5>
+            <h5><a href="/messages/{{ message[7] }}"> {{ message[6] }} </a></h5>
             {{ message[4].strftime("%Y-%m-%d %H:%M") }}
             {% if message[2] == login_id %}
                 <h5 style="color:red;"><i>{{ message[3] }}:</i></h5>
@@ -14,12 +14,11 @@
                     <div style="background-color: lightgray;">
                         {{ message[5] }}
                     </div>
-                    <br>
                 {% endif %}
                 <div style="white-space: pre-line">
                     {{ message[1] }}
                 </div>
-                <p>
+                <br>
                 <a href="/modify2/{{ message[0] }}/{{ user_search }}/{{ topic_search }}/{{ text_search }}">Muuta</a>
                 <a href="/messagedel2/{{ message[0] }}/{{ user_search }}/{{ topic_search }}/{{ text_search }}">Poista</a>
             {% else %}
@@ -33,7 +32,7 @@
                 <div style="white-space: pre-line">
                     {{ message[1] }}
                 </div>
-                <p>
+                <br>
                 <a href="/reply/{{ message[0] }}">Vastaa</a>
                 {% if user_rights == 3 %}<a href="/messagedel2/{{ message[0] }}/{{ user_search }}/{{ topic_search }}/{{ text_search }}">Poista</a>{% endif %}
             {% endif %}

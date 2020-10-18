@@ -30,7 +30,7 @@ def find_messages(user_rights, author, topic, content):
     author = "%" + author + "%"
     content = "%" + content + "%"
     topic = "%" + topic + "%"
-    sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message, T.topicname FROM messages M, users U, topics T, areas A " \
+    sql = "SELECT M.id, M.content, U.id, U.alias, M.sent_at, M.ref_message, T.topicname, T.id FROM messages M, users U, topics T, areas A " \
         "WHERE M.visible = true AND M.user_id=U.id AND M.topic_id=T.id AND T.area_id=A.id "
     if user_rights < 2:
         sql = sql + "AND A.hidden=false "
