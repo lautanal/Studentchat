@@ -24,7 +24,8 @@
                 <a href="/modify/{{ message[0] }}">Muuta</a>
                 <a href="/messagedel/{{ message[0] }}">Poista</a>
             {% else %}
-                <h5 style="color:blue;"><b><i>{{ message[3] }}:</i></b></h5>
+                <h5 style="color:blue;"><b><i>{{ message[3] }}:</i></b>
+                </h5>
                 {% if message[5] != None %}
                     <div style="background-color: lightgray;">
                         {{ message[5] }}

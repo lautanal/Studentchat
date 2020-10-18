@@ -35,7 +35,7 @@
                 </div>
                 <p>
                 <a href="/reply/{{ message[0] }}">Vastaa</a>
-                {% if user_rights == 3 %}<a href="/messagedel/{{ message[0] }}">Poista</a>{% endif %}
+                {% if user_rights == 3 %}<a href="/messagedel2/{{ message[0] }}/{{ user_search }}/{{ topic_search }}/{{ text_search }}">Poista</a>{% endif %}
             {% endif %}
             <p>
             <hr>
